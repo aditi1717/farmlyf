@@ -1,0 +1,140 @@
+
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import bannerMix from '../../../assets/banner_mix.jpg';
+
+const banners = [
+    {
+        id: 1,
+        image: bannerMix,
+        title: 'Premium Kashmiri Walnuts',
+        subtitle: '100% natural, hand-cracked for maximum freshness.',
+        discount: 'FRESH ARRIVAL'
+    },
+    {
+        id: 2,
+        image: bannerMix,
+        title: 'Mammoth Almonds (Badam)',
+        subtitle: 'The perfect brain-food for your daily morning routine.',
+        discount: 'BESTSELLER'
+    },
+    {
+        id: 3,
+        image: bannerMix,
+        title: 'Nutritious Energy Mix',
+        subtitle: 'A powerful blend of seeds, nuts and berries.',
+        discount: 'FITNESS PACK'
+    }
+];
+
+const PromoSlider = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % banners.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, []);
+
+    const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
+    const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + banners.length) % banners.length);
+
+    return (
+        <section className="w-full bg-background py-6 md:py-10 px-4 md:px-12 font-['Inter']">
+            <div className="relative w-full h-[280px] md:h-[400px] overflow-hidden rounded-[2.5rem] shadow-xl bg-black group">
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={currentIndex}
+                        initial={{ opacity: 0, scale: 1.05 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute inset-0"
+                    >
+                        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10" />
+                        <img
+                            src={banners[currentIndex].image}
+                            alt={banners[currentIndex].title}
+                            className="w-full h-full object-cover"
+                        />
+
+                        <div className="absolute inset-0 z-20 flex flex-col justify-center px-8 md:px-16 text-white pointer-events-none">
+                            <motion.div
+                                initial={{ y: 15, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                                className="flex items-center gap-3 mb-4"
+                            >
+                                <span className="bg-primary text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full shadow-lg">
+                                    {banners[currentIndex].discount}
+                                </span>
+                                <div className="h-[1px] w-12 bg-white/30" />
+                            </motion.div>
+
+                            <motion.h2
+                                initial={{ y: 15, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.4 }}
+                                className="text-2xl md:text-5xl font-black mb-3 font-['Poppins'] leading-tight max-w-xl text-white drop-shadow-md"
+                            >
+                                {banners[currentIndex].title}
+                            </motion.h2>
+
+                            <motion.p
+                                initial={{ y: 15, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.5 }}
+                                className="text-[10px] md:text-lg text-white/80 font-bold max-w-sm mb-6 leading-snug"
+                            >
+                                {banners[currentIndex].subtitle}
+                            </motion.p>
+
+                            <motion.button
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ delay: 0.6 }}
+                                className="pointer-events-auto bg-primary hover:bg-primaryHover text-white font-bold text-[10px] md:text-sm uppercase tracking-widest px-6 py-3 rounded-full transition-all shadow-xl active:scale-95 w-fit flex items-center gap-2 group/btn"
+                            >
+                                Explore Collection
+                                <div className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">
+                                    <ChevronRight size={12} />
+                                </div>
+                            </motion.button>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+
+                {/* Controls - Minimal & Hidden until hover */}
+                <div className="absolute inset-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between px-6 pointer-events-none">
+                    <button
+                        onClick={prevSlide}
+                        className="pointer-events-auto p-2.5 rounded-full bg-white/10 hover:bg-white hover:text-footerBg text-white transition-all backdrop-blur-md border border-white/20 shadow-lg"
+                    >
+                        <ChevronLeft size={22} />
+                    </button>
+                    <button
+                        onClick={nextSlide}
+                        className="pointer-events-auto p-2.5 rounded-full bg-white/10 hover:bg-white hover:text-footerBg text-white transition-all backdrop-blur-md border border-white/20 shadow-lg"
+                    >
+                        <ChevronRight size={22} />
+                    </button>
+                </div>
+
+                {/* Bottom Indicators */}
+                <div className="absolute bottom-6 left-8 md:left-16 z-30 flex gap-2">
+                    {banners.map((_, idx) => (
+                        <button
+                            key={idx}
+                            onClick={() => setCurrentIndex(idx)}
+                            className={`transition-all duration-500 rounded-full h-1.5 ${currentIndex === idx ? 'w-8 bg-primary shadow-[0_0_10px_rgba(16,185,129,0.5)]' : 'w-2 bg-white/30 hover:bg-white/50'}`}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default PromoSlider;
