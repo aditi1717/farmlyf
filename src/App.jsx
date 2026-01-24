@@ -38,6 +38,7 @@ import CouponFormPage from './modules/admin/pages/CouponFormPage';
 import SettingsPage from './modules/admin/pages/SettingsPage';
 import InfluencerReferralPage from './modules/admin/pages/InfluencerReferralPage';
 import LoginPage from './modules/admin/pages/LoginPage';
+import BannerListPage from './modules/admin/pages/BannerListPage';
 
 function App() {
   return (
@@ -84,6 +85,7 @@ function App() {
               <Route path="products" element={<ProductListPage />} />
               <Route path="products/add" element={<ProductFormPage />} />
               <Route path="products/edit/:id" element={<ProductFormPage />} />
+              <Route path="banners" element={<BannerListPage />} />
               <Route path="combo-categories" element={<ComboListPage />} />
               <Route path="combo-products" element={<ComboProductsPage />} />
               <Route path="combo-products/add" element={<ComboFormPage />} />

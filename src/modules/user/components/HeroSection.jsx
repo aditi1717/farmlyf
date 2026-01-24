@@ -1,25 +1,111 @@
-
-import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import heroBanner from '../../../assets/images/hero.png';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useShop } from '../../../context/ShopContext';
 import logo from '../../../assets/logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection = () => {
+    const { getBannersBySection } = useShop();
+    const banners = getBannersBySection('hero');
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const navigate = useNavigate();
+
+    // Auto-slide
+    useEffect(() => {
+        if (banners.length === 0) return;
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % banners.length);
+        }, 5000);
+        return () => clearInterval(timer);
+    }, [banners.length]);
+
+    const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
+    const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + banners.length) % banners.length);
+
+    // Fallback if no banners
+    if (banners.length === 0) return null;
+
+    const currentSlide = banners[currentIndex];
+
     return (
         <div className="w-full bg-background py-6 md:py-10 px-4 md:px-12">
             <div className="w-full">
-                <div className="relative w-full rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/6] bg-[#fdfdfd] shadow-2xl border border-mint/20 flex items-center justify-between px-6 md:px-20 group">
+                <div className="relative w-full rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/6] bg-[#fdfdfd] shadow-2xl border border-mint/20 group">
 
-                    {/* Background Banner Image */}
-                    <div className="absolute inset-0 z-0">
-                        <img
-                            src={heroBanner}
-                            alt="FarmLyf Brand Banner"
-                            className="w-full h-full object-cover object-center"
-                        />
-                    </div>
+                    {/* Slider Content */}
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentIndex}
+                            className="absolute inset-0 flex items-center justify-between px-6 md:px-20"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.5 }}
+                        >
+                            {/* Background Banner Image */}
+                            <div className="absolute inset-0 z-0">
+                                <motion.img
+                                    initial={{ scale: 1.05 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ duration: 6, ease: "linear" }}
+                                    src={currentSlide.image}
+                                    alt={currentSlide.title}
+                                    className="w-full h-full object-cover object-center"
+                                />
+                                <div className="absolute inset-0 bg-black/20" /> {/* Slight overlay for text readability */}
+                            </div>
 
-                    {/* Branding Overlay - Clean and separated */}
+                            {/* Left Side Content */}
+                            <div className="z-30 space-y-1 md:space-y-2 max-w-md mt-28 md:mt-16 md:ml-4 relative text-shadow-sm">
+                                <motion.div
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="flex flex-wrap items-center gap-2 mb-2"
+                                >
+                                    <span className="bg-offerRed text-white text-[9px] md:text-[10px] font-bold px-2.5 py-1 rounded-full shadow-lg uppercase">
+                                        LIMITED TIME
+                                    </span>
+                                    {currentSlide.badgeText && (
+                                        <span className="text-white bg-primary px-2.5 py-1 rounded-full font-bold text-[9px] md:text-[10px] tracking-widest uppercase shadow-md">
+                                            {currentSlide.badgeText}
+                                        </span>
+                                    )}
+                                </motion.div>
+
+                                <motion.h1
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.3 }}
+                                    className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight"
+                                >
+                                    {currentSlide.title}
+                                </motion.h1>
+
+                                <motion.p
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.4 }}
+                                    className="text-white/95 text-xs md:text-lg font-bold max-w-xs leading-snug drop-shadow-md mb-4"
+                                >
+                                    {currentSlide.subtitle}
+                                </motion.p>
+
+                                <motion.button
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.5 }}
+                                    onClick={() => currentSlide.link && navigate(currentSlide.link)}
+                                    className="mt-3 bg-primary hover:bg-primaryHover text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full font-bold text-sm md:text-base flex items-center gap-2 transition-all shadow-xl active:scale-95"
+                                >
+                                    {currentSlide.ctaText || 'Shop Now'} <ArrowRight size={18} />
+                                </motion.button>
+                            </div>
+                        </motion.div>
+                    </AnimatePresence>
+
+                    {/* Static Branding Overlay */}
                     <div className="absolute top-4 left-6 md:left-12 z-40 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
                         <span className="text-[10px] tracking-[0.2em] uppercase text-white/80 font-bold block">Passion for Nutrition</span>
                         <div className="flex items-center gap-1.5">
@@ -27,25 +113,8 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    {/* Left Side Content - Compact and pushed down */}
-                    <div className="z-30 space-y-1 md:space-y-2 max-w-md mt-28 md:mt-24 md:ml-4 relative">
-                        <div className="flex flex-wrap items-center gap-2 mb-2">
-                            <span className="bg-offerRed text-white text-[9px] md:text-[10px] font-bold px-2.5 py-1 rounded-full shadow-lg">LIMITED TIME</span>
-                            <span className="text-white bg-primary px-2.5 py-1 rounded-full font-bold text-[9px] md:text-[10px] tracking-widest uppercase shadow-md">Republic Day Special</span>
-                        </div>
-                        <h1 className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight">
-                            <span className="text-offerRed block -mb-1">Sale</span> is Live!
-                        </h1>
-                        <p className="text-white/95 text-xs md:text-lg font-bold max-w-xs leading-snug drop-shadow-sm">
-                            Experience the crunch of health with our <span className="text-primary-light">Premium Selection</span>.
-                        </p>
-                        <button className="mt-3 bg-primary hover:bg-primaryHover text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full font-bold text-sm md:text-base flex items-center gap-2 transition-all shadow-xl active:scale-95">
-                            Shop Collections <ArrowRight size={18} />
-                        </button>
-                    </div>
-
-                    {/* Right Side Offer Box - Smaller, Straight, and Compact */}
-                    <div className="hidden lg:flex flex-col items-center justify-center border border-white/60 bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-2xl shadow-2xl z-20 relative transition-all duration-500">
+                    {/* Static Right Side Offer Box (Optional - kept for consistent look if desired, or can be dynamic later) */}
+                    <div className="hidden lg:flex flex-col items-center justify-center border border-white/60 bg-white/80 backdrop-blur-xl p-5 md:p-6 rounded-2xl shadow-2xl z-20 absolute right-20 top-1/2 -translate-y-1/2 transition-all duration-500">
                         <div className="absolute -top-3 -right-3 bg-offerRed text-white text-[10px] font-black px-3 py-1 rounded-full shadow-lg animate-bounce uppercase tracking-tighter">
                             Hot Deal
                         </div>
@@ -70,8 +139,33 @@ const HeroSection = () => {
                         </div>
                     </div>
 
-                    {/* Decorative Elements */}
-                    <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+                    {/* Slider Controls (Hover) */}
+                    <div className="absolute inset-0 z-30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-between px-4 pointer-events-none">
+                        <button
+                            onClick={prevSlide}
+                            className="pointer-events-auto p-2 md:p-3 rounded-full bg-white/10 hover:bg-white hover:text-black text-white transition-all backdrop-blur-md border border-white/20 shadow-lg"
+                        >
+                            <ChevronLeft size={24} />
+                        </button>
+                        <button
+                            onClick={nextSlide}
+                            className="pointer-events-auto p-2 md:p-3 rounded-full bg-white/10 hover:bg-white hover:text-black text-white transition-all backdrop-blur-md border border-white/20 shadow-lg"
+                        >
+                            <ChevronRight size={24} />
+                        </button>
+                    </div>
+
+                    {/* Bottom Indicators */}
+                    <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 flex gap-2">
+                        {banners.map((_, idx) => (
+                            <button
+                                key={idx}
+                                onClick={() => setCurrentIndex(idx)}
+                                className={`transition-all duration-500 rounded-full h-1 ${currentIndex === idx ? 'w-8 bg-white shadow-lg' : 'w-2 bg-white/40 hover:bg-white/60'}`}
+                            />
+                        ))}
+                    </div>
+
                 </div>
             </div>
         </div>

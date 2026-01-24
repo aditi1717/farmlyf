@@ -6,16 +6,8 @@ const AdminHeader = () => {
     const { user } = useAuth();
 
     return (
-        <header className="h-20 bg-footerBg border-b border-white/5 flex items-center justify-between sticky top-0 z-40 text-left">
-            {/* Search Bar */}
-            <div className="relative w-96 ml-8">
-                <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" />
-                <input
-                    type="text"
-                    placeholder="Search orders, products or users..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-2.5 pl-12 pr-4 text-sm font-semibold text-white focus:bg-white/10 focus:border-primary outline-none transition-all placeholder:text-gray-600"
-                />
-            </div>
+        <header className="h-20 bg-footerBg border-b border-white/5 flex items-center justify-end sticky top-0 z-40 text-left">
+
 
             {/* Right Actions with Dark Background */}
             <div className="h-full bg-white/5 px-8 flex items-center gap-6 border-l border-white/5">

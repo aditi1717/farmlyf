@@ -15,7 +15,8 @@ import {
     ChevronRight,
     Plus,
     List,
-    Share2
+    Share2,
+    Monitor
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext';
@@ -39,6 +40,7 @@ const AdminSidebar = () => {
         { icon: Layers, label: 'Categories', path: '/admin/categories' },
         { icon: Layers, label: 'Sub-categories', path: '/admin/sub-categories' },
         { icon: Package, label: 'Products', path: '/admin/products' },
+        { icon: Monitor, label: 'Banners', path: '/admin/banners' },
         { icon: ShoppingBag, label: 'Orders', path: '/admin/orders' },
         { icon: RefreshCcw, label: 'Returns', path: '/admin/returns' },
         { icon: TicketPercent, label: 'Coupons', path: '/admin/coupons' },
@@ -59,7 +61,9 @@ const AdminSidebar = () => {
             {/* Navigation Links */}
             <nav className="flex-1 overflow-y-auto py-6 px-4 space-y-1 custom-scrollbar">
                 <p className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] mb-4 px-2">Main Menu</p>
-                {menuItems.map((item) => (
+
+                {/* Items Before Combos (Dashboard to Products) */}
+                {menuItems.slice(0, 5).map((item) => (
                     <Link
                         key={item.path}
                         to={item.path}
@@ -73,7 +77,7 @@ const AdminSidebar = () => {
                     </Link>
                 ))}
 
-                {/* Combos Section with Double Nesting */}
+                {/* Combos Section w/ Double Nesting - Moved Here */}
                 <div className="mt-1">
                     <button
                         onClick={() => setCombosExpanded(!combosExpanded)}
@@ -135,6 +139,21 @@ const AdminSidebar = () => {
                         </div>
                     )}
                 </div>
+
+                {/* Items After Combos (Banners to Referrals) */}
+                {menuItems.slice(5).map((item) => (
+                    <Link
+                        key={item.path}
+                        to={item.path}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${isActive(item.path)
+                            ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                            : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                            }`}
+                    >
+                        <item.icon size={20} strokeWidth={isActive(item.path) ? 2.5 : 2} />
+                        <span className="font-bold text-sm">{item.label}</span>
+                    </Link>
+                ))}
             </nav>
 
             {/* Footer Actions */}

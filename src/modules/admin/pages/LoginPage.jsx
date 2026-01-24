@@ -54,17 +54,16 @@ const LoginPage = () => {
                 className="w-full max-w-[420px] relative z-10"
             >
                 {/* Branding */}
-                <div className="text-center mb-10 text-left">
-                    <div className="inline-flex items-center gap-3 mb-4">
-                        <img src={logo} alt="FarmLyf" className="h-10 w-auto" />
-                        <span className="text-2xl font-black text-white tracking-tighter uppercase">Admin<span className="text-white text-sm ml-1 font-bold">Portal</span></span>
-                    </div>
-                    <p className="text-gray-400 text-[10px] font-black uppercase tracking-[0.3em] text-center">Corporate Logistics Management</p>
+                {/* Branding */}
+                <div className="flex flex-col items-center justify-center mb-6 text-center">
+                    <img src={logo} alt="FarmLyf" className="h-12 w-auto mb-4" />
+                    <h1 className="text-2xl font-black text-white tracking-tighter uppercase mb-2">
+                        Admin <span className="text-primary">Portal</span>
+                    </h1>
                 </div>
 
-                {/* Login Card */}
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl shadow-black/40">
-                    <div className="mb-8 flex items-center gap-3">
+                    <div className="mb-8 flex flex-col items-center justify-center gap-3 text-center">
                         <div className="w-10 h-10 bg-primary/20 text-primary rounded-xl flex items-center justify-center">
                             <ShieldCheck size={20} strokeWidth={2.5} />
                         </div>

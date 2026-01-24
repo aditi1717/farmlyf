@@ -608,6 +608,90 @@ export const ShopProvider = ({ children }) => {
             .slice(0, limit);
     };
 
+    // --- Banner Management ---
+    const [banners, setBanners] = useState([]);
+
+    useEffect(() => {
+        // Initialize Banners
+        const storedBanners = JSON.parse(localStorage.getItem('farmlyf_banners'));
+        if (storedBanners) {
+            setBanners(storedBanners);
+        } else {
+            // Default Banners
+            const defaultBanners = [
+                // Hero Section Defaults
+                {
+                    id: 'hero-1',
+                    section: 'hero',
+                    title: 'Sale is Live!',
+                    subtitle: 'Experience the crunch of health with our Premium Selection.',
+                    image: 'https://images.unsplash.com/photo-1596525737299-db0ebcf199df?auto=format&fit=crop&w=800&q=80',
+                    badgeText: 'Republic Day Special',
+                    ctaText: 'Shop Collections',
+                    link: '/collections'
+                },
+                {
+                    id: 'hero-2',
+                    section: 'hero',
+                    title: 'Organic & Pure',
+                    subtitle: 'Sourced directly from the best farms in Kashmir.',
+                    image: 'https://images.unsplash.com/photo-1606822361688-467ce880a133?auto=format&fit=crop&w=800&q=80',
+                    badgeText: '100% Natural',
+                    ctaText: 'Explore Now',
+                    link: '/catalog'
+                },
+                // Promo Section Defaults
+                {
+                    id: 'promo-1',
+                    section: 'promo',
+                    title: 'Premium Kashmiri Walnuts',
+                    subtitle: '100% natural, hand-cracked for maximum freshness.',
+                    image: 'https://images.unsplash.com/photo-1594051516003-889a744cb89f?auto=format&fit=crop&w=800&q=80',
+                    badgeText: 'FRESH ARRIVAL',
+                    ctaText: 'Explore Collection'
+                },
+                {
+                    id: 'promo-2',
+                    section: 'promo',
+                    title: 'Mammoth Almonds (Badam)',
+                    subtitle: 'The perfect brain-food for your daily morning routine.',
+                    image: 'https://images.unsplash.com/photo-1533230408806-3883e580e605?auto=format&fit=crop&w=800&q=80',
+                    badgeText: 'BESTSELLER',
+                    ctaText: 'Buy Now'
+                }
+            ];
+            setBanners(defaultBanners);
+            localStorage.setItem('farmlyf_banners', JSON.stringify(defaultBanners));
+        }
+    }, []);
+
+    const addBanner = (bannerData) => {
+        const newBanner = {
+            id: 'bnr-' + Date.now(),
+            ...bannerData
+        };
+        const updatedBanners = [...banners, newBanner];
+        setBanners(updatedBanners);
+        localStorage.setItem('farmlyf_banners', JSON.stringify(updatedBanners));
+        return newBanner;
+    };
+
+    const deleteBanner = (id) => {
+        const updatedBanners = banners.filter(b => b.id !== id);
+        setBanners(updatedBanners);
+        localStorage.setItem('farmlyf_banners', JSON.stringify(updatedBanners));
+    };
+
+    const updateBanner = (id, updates) => {
+        const updatedBanners = banners.map(b => b.id === id ? { ...b, ...updates } : b);
+        setBanners(updatedBanners);
+        localStorage.setItem('farmlyf_banners', JSON.stringify(updatedBanners));
+    };
+
+    const getBannersBySection = (section) => {
+        return banners.filter(b => b.section === section);
+    };
+
     return (
         <ShopContext.Provider value={{
             packs,
@@ -751,7 +835,13 @@ export const ShopProvider = ({ children }) => {
             moveToCartFromSaved,
             removeFromSaved,
             addToSaved,
-            getRecommendations
+            getRecommendations,
+            // Banner Functions
+            banners,
+            addBanner,
+            deleteBanner,
+            updateBanner,
+            getBannersBySection
         }}>
             {children}
         </ShopContext.Provider>

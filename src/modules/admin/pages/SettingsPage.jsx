@@ -156,6 +156,52 @@ const SettingsPage = () => {
                                 </div>
                             </div>
                         )}
+
+                        {activeTab === 'account' && (
+                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
+                                <h3 className="text-sm font-black text-footerBg uppercase tracking-widest border-b border-gray-50 pb-4">Admin Profile</h3>
+
+                                <div className="flex items-start gap-8">
+                                    <div className="flex flex-col items-center gap-4">
+                                        <div className="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                                            <User size={48} className="text-gray-400" />
+                                        </div>
+                                        <button className="text-[10px] font-black uppercase tracking-widest text-primary hover:text-footerBg transition-colors">
+                                            Change Photo
+                                        </button>
+                                    </div>
+
+                                    <div className="flex-1 space-y-6">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Full Name</label>
+                                                <input type="text" defaultValue="Admin User" className="w-full bg-gray-50 border border-transparent rounded-2xl p-4 text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all" />
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Email Address</label>
+                                                <input type="email" defaultValue="admin@farmlyf.com" className="w-full bg-gray-50 border border-transparent rounded-2xl p-4 text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all" />
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Role</label>
+                                                <input type="text" defaultValue="Super Administrator" disabled className="w-full bg-gray-100 border border-transparent rounded-2xl p-4 text-sm font-bold text-gray-500 cursor-not-allowed" />
+                                            </div>
+                                            <div className="flex flex-col gap-2">
+                                                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Phone Number</label>
+                                                <input type="tel" defaultValue="+91 98765 43210" className="w-full bg-gray-50 border border-transparent rounded-2xl p-4 text-sm font-bold outline-none focus:bg-white focus:border-primary transition-all" />
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-6 border-t border-gray-50">
+                                            <h4 className="text-xs font-black text-red-500 uppercase tracking-tight mb-2">Danger Zone</h4>
+                                            <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-4">Permanently delete this account and all associated data.</p>
+                                            <button className="px-6 py-3 bg-red-50 text-red-500 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">
+                                                Delete Account
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

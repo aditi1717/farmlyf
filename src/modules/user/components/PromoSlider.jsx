@@ -2,44 +2,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import bannerMix from '../../../assets/banner_mix.jpg';
 
-const banners = [
-    {
-        id: 1,
-        image: bannerMix,
-        title: 'Premium Kashmiri Walnuts',
-        subtitle: '100% natural, hand-cracked for maximum freshness.',
-        discount: 'FRESH ARRIVAL'
-    },
-    {
-        id: 2,
-        image: bannerMix,
-        title: 'Mammoth Almonds (Badam)',
-        subtitle: 'The perfect brain-food for your daily morning routine.',
-        discount: 'BESTSELLER'
-    },
-    {
-        id: 3,
-        image: bannerMix,
-        title: 'Nutritious Energy Mix',
-        subtitle: 'A powerful blend of seeds, nuts and berries.',
-        discount: 'FITNESS PACK'
-    }
-];
+
+import { useShop } from '../../../context/ShopContext';
 
 const PromoSlider = () => {
+    const { getBannersBySection } = useShop();
+    const banners = getBannersBySection('promo');
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
+        if (banners.length === 0) return;
         const timer = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % banners.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, []);
+    }, [banners.length]);
 
     const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % banners.length);
     const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + banners.length) % banners.length);
+
+    if (banners.length === 0) return null;
 
     return (
         <section className="w-full bg-background py-6 md:py-10 px-4 md:px-12 font-['Inter']">
@@ -68,7 +51,7 @@ const PromoSlider = () => {
                                 className="flex items-center gap-3 mb-4"
                             >
                                 <span className="bg-primary text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full shadow-lg">
-                                    {banners[currentIndex].discount}
+                                    {banners[currentIndex].badgeText}
                                 </span>
                                 <div className="h-[1px] w-12 bg-white/30" />
                             </motion.div>
