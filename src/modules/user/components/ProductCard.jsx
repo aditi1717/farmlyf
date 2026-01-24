@@ -13,7 +13,6 @@ const ProductCard = ({ product }) => {
 
     // Handle products with variants (Flipkart style)
     const hasVariants = product.variants && product.variants.length > 0;
-    const defaultVariant = hasVariants ? product.variants[0] : null;
 
     // Get lowest price for "From ₹X" look
     const displayPrice = hasVariants

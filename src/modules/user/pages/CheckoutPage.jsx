@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useShop } from '../../../context/ShopContext';
 import { useAuth } from '../../../context/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, CreditCard, Banknote, Truck, Tag, X, Percent } from 'lucide-react';
+import { ArrowLeft, CreditCard, Banknote, Truck, Tag, X, Percent } from 'lucide-react';
 import CouponsModal from '../components/CouponsModal';
 import logo from '../../../assets/logo.png';
 
