@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { PACKS, SKUS, PRODUCTS, COUPONS } from '../mockData/data';
+import bannerMix from '../assets/banner_mix.jpg';
+import authShowcase from '../assets/auth_showcase.jpg';
 
 const ShopContext = createContext();
 
@@ -613,53 +615,79 @@ export const ShopProvider = ({ children }) => {
 
     useEffect(() => {
         // Initialize Banners
-        const storedBanners = JSON.parse(localStorage.getItem('farmlyf_banners'));
+        let storedBanners = JSON.parse(localStorage.getItem('farmlyf_banners'));
+
+        // Replacement map for broken Unsplash URLs
+        const replacements = {
+            'https://images.unsplash.com/photo-1596525737299-db0ebcf199df?auto=format&fit=crop&w=800&q=80': bannerMix,
+            'https://images.unsplash.com/photo-1606822361688-467ce880a133?auto=format&fit=crop&w=800&q=80': authShowcase,
+            'https://images.unsplash.com/photo-1594051516003-889a744cb89f?auto=format&fit=crop&w=800&q=80': bannerMix,
+            'https://images.unsplash.com/photo-1533230408806-3883e580e605?auto=format&fit=crop&w=800&q=80': authShowcase
+        };
+
+        const defaultBanners = [
+            // Hero Section Defaults
+            {
+                id: 'hero-1',
+                section: 'hero',
+                title: 'Sale is Live!',
+                subtitle: 'Experience the crunch of health with our Premium Selection.',
+                image: bannerMix,
+                badgeText: 'Republic Day Special',
+                ctaText: 'Shop Collections',
+                link: '/collections'
+            },
+            {
+                id: 'hero-2',
+                section: 'hero',
+                title: 'Organic & Pure',
+                subtitle: 'Sourced directly from the best farms in Kashmir.',
+                image: authShowcase,
+                badgeText: '100% Natural',
+                ctaText: 'Explore Now',
+                link: '/catalog'
+            },
+            // Promo Section Defaults
+            {
+                id: 'promo-1',
+                section: 'promo',
+                title: 'Premium Kashmiri Walnuts',
+                subtitle: '100% natural, hand-cracked for maximum freshness.',
+                image: bannerMix,
+                badgeText: 'FRESH ARRIVAL',
+                ctaText: 'Explore Collection'
+            },
+            {
+                id: 'promo-2',
+                section: 'promo',
+                title: 'Mammoth Almonds (Badam)',
+                subtitle: 'The perfect brain-food for your daily morning routine.',
+                image: authShowcase,
+                badgeText: 'BESTSELLER',
+                ctaText: 'Buy Now'
+            }
+        ];
+
         if (storedBanners) {
+            // Fix existing broken URLs in localStorage
+            let hasFixes = false;
+            storedBanners = storedBanners.map((b, index) => {
+                // Aggressively fix ANY Unsplash URL
+                if (b.image && b.image.includes('unsplash.com')) {
+                    hasFixes = true;
+                    // Alternate between the two local images
+                    const newImage = index % 2 === 0 ? bannerMix : authShowcase;
+                    return { ...b, image: newImage };
+                }
+                return b;
+            });
+
+            if (hasFixes) {
+                localStorage.setItem('farmlyf_banners', JSON.stringify(storedBanners));
+            }
             setBanners(storedBanners);
         } else {
             // Default Banners
-            const defaultBanners = [
-                // Hero Section Defaults
-                {
-                    id: 'hero-1',
-                    section: 'hero',
-                    title: 'Sale is Live!',
-                    subtitle: 'Experience the crunch of health with our Premium Selection.',
-                    image: 'https://images.unsplash.com/photo-1596525737299-db0ebcf199df?auto=format&fit=crop&w=800&q=80',
-                    badgeText: 'Republic Day Special',
-                    ctaText: 'Shop Collections',
-                    link: '/collections'
-                },
-                {
-                    id: 'hero-2',
-                    section: 'hero',
-                    title: 'Organic & Pure',
-                    subtitle: 'Sourced directly from the best farms in Kashmir.',
-                    image: 'https://images.unsplash.com/photo-1606822361688-467ce880a133?auto=format&fit=crop&w=800&q=80',
-                    badgeText: '100% Natural',
-                    ctaText: 'Explore Now',
-                    link: '/catalog'
-                },
-                // Promo Section Defaults
-                {
-                    id: 'promo-1',
-                    section: 'promo',
-                    title: 'Premium Kashmiri Walnuts',
-                    subtitle: '100% natural, hand-cracked for maximum freshness.',
-                    image: 'https://images.unsplash.com/photo-1594051516003-889a744cb89f?auto=format&fit=crop&w=800&q=80',
-                    badgeText: 'FRESH ARRIVAL',
-                    ctaText: 'Explore Collection'
-                },
-                {
-                    id: 'promo-2',
-                    section: 'promo',
-                    title: 'Mammoth Almonds (Badam)',
-                    subtitle: 'The perfect brain-food for your daily morning routine.',
-                    image: 'https://images.unsplash.com/photo-1533230408806-3883e580e605?auto=format&fit=crop&w=800&q=80',
-                    badgeText: 'BESTSELLER',
-                    ctaText: 'Buy Now'
-                }
-            ];
             setBanners(defaultBanners);
             localStorage.setItem('farmlyf_banners', JSON.stringify(defaultBanners));
         }
