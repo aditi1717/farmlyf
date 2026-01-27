@@ -87,9 +87,9 @@ const CategoryStrip = () => {
     };
 
     return (
-        <section className="bg-white py-16 px-4 md:px-12 relative overflow-hidden">
+        <section className="bg-white py-6 md:py-10 px-4 md:px-12 relative overflow-hidden">
             <div className="container mx-auto">
-                <div className="text-center mb-10 space-y-2">
+                <div className="text-center mb-4 md:mb-6 space-y-1 md:space-y-2">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ const CategoryStrip = () => {
                         initial="hidden"
                         whileInView="visible"
                         viewport={{ once: true }}
-                        className="flex gap-14 overflow-x-auto no-scrollbar scroll-smooth px-4 md:px-12 py-10 items-center w-full"
+                        className="flex gap-2 md:gap-14 overflow-x-auto no-scrollbar scroll-smooth px-2 md:px-12 py-1 md:py-10 items-center w-full"
                     >
                         {categories.map((cat, index) => (
                             <motion.div
@@ -131,11 +131,11 @@ const CategoryStrip = () => {
                                 variants={itemVariants}
                                 whileHover={{ y: -10, transition: { duration: 0.3 } }}
                                 onClick={() => navigate(cat.path)}
-                                className="relative min-w-[260px] md:min-w-[280px] h-24 flex items-center cursor-pointer group/item"
+                                className="relative min-w-[160px] md:min-w-[280px] h-14 md:h-24 flex items-center cursor-pointer group/item flex-shrink-0"
                             >
                                 {/* Elongated Pill Background */}
-                                <div className={`absolute right-0 w-[85%] h-[70%] ${cat.color} rounded-full flex items-center justify-center shadow-md border border-white/10 pl-20 pr-6 overflow-hidden transition-all duration-500 group-hover/item:shadow-2xl group-hover/item:border-white/30`}>
-                                    <span className="text-white font-black text-[13px] md:text-[15px] tracking-widest uppercase text-center leading-tight drop-shadow-lg z-10">
+                                <div className={`absolute right-0 w-[90%] md:w-[85%] h-[80%] md:h-[70%] ${cat.color} rounded-full flex items-center justify-center shadow-md border border-white/10 pl-14 md:pl-20 pr-4 md:pr-6 overflow-hidden transition-all duration-500 group-hover/item:shadow-2xl group-hover/item:border-white/30`}>
+                                    <span className="text-white font-black text-[9px] md:text-[15px] tracking-widest uppercase text-center leading-tight drop-shadow-lg z-10">
                                         {cat.name}
                                     </span>
                                     {/* Reflection/Shine Effect */}
@@ -155,7 +155,7 @@ const CategoryStrip = () => {
                                         ease: "easeInOut",
                                         delay: index * 0.2
                                     }}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 w-32 h-32 z-10 flex items-center justify-center"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 w-16 h-16 md:w-32 md:h-32 z-10 flex items-center justify-center"
                                 >
                                     <motion.img
                                         whileHover={{ scale: 1.15, rotate: 5 }}

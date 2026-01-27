@@ -56,9 +56,9 @@ const packs = [
 
 const ShopByPacks = () => {
     return (
-        <section className="bg-[#FFFBEB] py-20 px-4 md:px-12 relative overflow-hidden">
+        <section className="bg-[#FFFBEB] py-8 md:py-20 px-3 md:px-12 relative overflow-hidden">
             <div className="container mx-auto relative z-10">
-                <div className="text-center mb-10 space-y-2">
+                <div className="text-center mb-6 md:mb-10 space-y-1 md:space-y-2">
                     <motion.span
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -77,7 +77,7 @@ const ShopByPacks = () => {
                     <div className="w-12 h-1 bg-primary mx-auto rounded-full mt-1" />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-10">
                     {packs.map((pack, index) => (
                         <motion.div
                             key={index}
@@ -87,9 +87,9 @@ const ShopByPacks = () => {
                             viewport={{ once: true }}
                         >
                             <Link to={pack.path} className="group block h-full">
-                                <div className="bg-white rounded-[2rem] p-5 h-full shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-primary/20 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] hover:bg-[#F8FAF9] transition-all duration-500 flex flex-col items-center text-center group-hover:scale-[1.02] relative">
+                                <div className="bg-white rounded-[1.2rem] md:rounded-[2rem] p-3 md:p-5 h-full shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-primary/20 hover:shadow-[0_40px_80px_rgba(0,0,0,0.12)] hover:bg-[#F8FAF9] transition-all duration-500 flex flex-col items-center text-center group-hover:scale-[1.02] relative">
                                     {/* Image Container with balanced padding */}
-                                    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-gray-50 mb-6 shadow-sm transition-all duration-500">
+                                    <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[1rem] md:rounded-[1.5rem] bg-gray-50 mb-3 md:mb-6 shadow-sm transition-all duration-500">
                                         <img
                                             src={pack.image}
                                             alt={pack.title}
@@ -100,27 +100,27 @@ const ShopByPacks = () => {
                                         />
 
                                         {/* Minimal Tag Overlay */}
-                                        <div className="absolute top-4 right-4">
-                                            <span className="bg-primary text-white px-3 py-1 rounded-full text-[9px] font-black tracking-widest uppercase shadow-lg">
+                                        <div className="absolute top-2 right-2 md:top-4 md:right-4">
+                                            <span className="bg-primary text-white px-2 py-0.5 md:px-3 md:py-1 rounded-full text-[7px] md:text-[9px] font-black tracking-widest uppercase shadow-lg">
                                                 {pack.tag}
                                             </span>
                                         </div>
                                     </div>
 
                                     {/* Content with elegant type */}
-                                    <div className="space-y-2 pb-2">
-                                        <h3 className="text-xl md:text-2xl font-black text-primary tracking-tight transition-colors duration-300">
+                                    <div className="space-y-1 md:space-y-2 pb-1 md:pb-2 w-full">
+                                        <h3 className="text-sm md:text-2xl font-black text-primary tracking-tight transition-colors duration-300 leading-tight">
                                             {pack.title}
                                         </h3>
-                                        <p className="text-gray-500 text-[13px] md:text-sm font-medium leading-relaxed max-w-[90%] mx-auto">
+                                        <p className="hidden md:block text-gray-500 text-[13px] md:text-sm font-medium leading-relaxed max-w-[90%] mx-auto">
                                             {pack.subtitle}
                                         </p>
                                     </div>
 
                                     {/* Subtle subtle indicator - Always Visible */}
-                                    <div className="mt-4 flex items-center gap-2 text-primary transition-all duration-500">
-                                        <span className="text-[10px] font-black tracking-[0.2em] uppercase">Shop Collection</span>
-                                        <div className="w-8 h-[1px] bg-primary group-hover:w-12 transition-all duration-500" />
+                                    <div className="mt-2 md:mt-4 flex items-center gap-1 md:gap-2 text-primary transition-all duration-500">
+                                        <span className="text-[8px] md:text-[10px] font-black tracking-[0.2em] uppercase">Shop</span>
+                                        <div className="w-4 md:w-8 h-[1px] bg-primary group-hover:w-8 md:group-hover:w-12 transition-all duration-500" />
                                     </div>
                                 </div>
                             </Link>

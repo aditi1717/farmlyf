@@ -59,47 +59,36 @@ const ReturnDetailPage = () => {
         : null;
 
     return (
-        <div className="bg-[#fcfcfc] min-h-screen py-12">
-            <div className="px-4 md:px-12 w-full">
-                <div className="flex items-center gap-4 mb-8">
-                    <button onClick={() => navigate('/returns')} className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
-                        <ArrowLeft size={24} />
+        <div className="bg-[#fcfcfc] min-h-screen py-4 md:py-12">
+            <div className="container mx-auto px-3 md:px-12 max-w-4xl">
+                <div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-10">
+                    <button onClick={() => navigate('/returns')} className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors text-footerBg/70">
+                        <ArrowLeft size={20} md:size={24} />
                     </button>
                     <div>
-                        <h1 className="text-2xl font-black text-footerBg uppercase tracking-tight">{isReplace ? 'Replacement Status' : 'Return Status'}</h1>
-                        <p className="text-gray-500 text-sm mt-1 font-mono">ID: {returnRequest.id}</p>
+                        <h1 className="text-xl md:text-3xl font-black text-footerBg uppercase tracking-tighter md:tracking-tight leading-none">
+                            {isReplace ? 'Replacement Status' : 'Return Status'}
+                        </h1>
+                        <p className="text-[10px] md:text-sm font-mono text-slate-400 mt-1">#{returnRequest.id}</p>
                     </div>
                 </div>
 
-                <div className="max-w-4xl mx-auto">
-                    {/* Status Timeline Card */}
-                    <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm p-6 mb-6">
-                        <h3 className="font-bold text-footerBg mb-6">Request Timeline</h3>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-8">
+                    {/* Status Timeline Section */}
+                    <div className="lg:col-span-12 xl:col-span-8 space-y-4">
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6">
+                            <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">Request Timeline</h3>
 
-                        {isRejected ? (
-                            <div className="bg-red-50 p-4 rounded-xl flex items-center gap-3 text-red-700 border border-red-100">
-                                <XCircle size={24} />
-                                <div>
-                                    <p className="font-bold">Request Rejected</p>
-                                    <p className="text-sm">Your return request was rejected. Please contact support for details.</p>
+                            {isRejected ? (
+                                <div className="bg-red-50 p-4 rounded-xl flex items-center gap-3 text-red-700 border border-red-100">
+                                    <XCircle size={20} />
+                                    <div>
+                                        <p className="text-sm font-black uppercase tracking-tight">Request Rejected</p>
+                                        <p className="text-[11px] font-medium opacity-80">Please contact support for details.</p>
+                                    </div>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className="relative mb-8 px-4 py-4">
-                                {/* Background Line */}
-                                <div className="absolute top-9 left-0 h-1 bg-gray-100 -translate-y-1/2 rounded-full z-0" style={{ left: '12.5%', width: '75%' }} />
-
-                                {/* Progress Line */}
-                                <div
-                                    className="absolute top-9 left-0 h-1 bg-primary -translate-y-1/2 rounded-full transition-all duration-1000 ease-out z-0"
-                                    style={{
-                                        left: '12.5%',
-                                        width: `${(Math.max(0, currentStepIndex) / (steps.length - 1)) * 75}%`
-                                    }}
-                                />
-
-                                {/* Steps */}
-                                <div className="relative z-10 flex w-full">
+                            ) : (
+                                <div className="flex flex-col md:flex-row justify-between gap-6 md:gap-4 relative px-2">
                                     {steps.map((step, index) => {
                                         const isActive = index <= currentStepIndex;
                                         const isStepCompleted = index < currentStepIndex || (index === currentStepIndex && isCompleted);
@@ -107,127 +96,133 @@ const ReturnDetailPage = () => {
                                         const Icon = step.icon;
 
                                         return (
-                                            <div key={index} className="flex-1 flex flex-col items-center">
-                                                {/* Icon Circle */}
-                                                <div
-                                                    className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 mb-3
-                                                        ${isStepCompleted ? 'bg-primary border-primary text-white' : 'bg-white'}
-                                                        ${isCurrent && !isStepCompleted ? 'border-primary text-primary shadow-md ring-4 ring-primary/10' : ''}
-                                                        ${!isActive ? 'border-gray-200 text-gray-300' : ''}
-                                                    `}
-                                                >
-                                                    <Icon size={isCurrent ? 20 : 18} />
+                                            <div key={index} className="flex md:flex-col items-center gap-4 md:gap-3 flex-1 relative min-h-[64px] md:min-h-0">
+                                                {/* Vertical Connector Line (Mobile) */}
+                                                {index < steps.length - 1 && (
+                                                    <div className="md:hidden absolute top-[40px] left-[20px] w-0.5 h-[calc(100%-16px)] bg-gray-100 z-0">
+                                                        <div className={`w-full bg-primary transition-all duration-500 ${index < currentStepIndex ? 'h-full' : 'h-0'}`} />
+                                                    </div>
+                                                )}
+
+                                                {/* Horizontal Connector Line (Desktop) */}
+                                                {index < steps.length - 1 && (
+                                                    <div className="hidden md:block absolute top-5 left-[calc(50%+24px)] w-[calc(100%-48px)] h-0.5 bg-gray-100">
+                                                        <div className={`h-full bg-primary transition-all duration-500 ${index < currentStepIndex ? 'w-full' : 'w-0'}`} />
+                                                    </div>
+                                                )}
+
+                                                <div className={`w-10 h-10 md:w-12 md:h-12 rounded-2xl flex items-center justify-center border-2 transition-all relative z-10 shrink-0
+                                                    ${isStepCompleted ? 'bg-primary/5 border-primary/20 text-primary' : 'bg-white'}
+                                                    ${isCurrent && !isStepCompleted ? 'border-primary text-primary bg-primary/5 shadow-lg shadow-primary/10' : ''}
+                                                    ${!isActive ? 'border-gray-50 text-gray-300' : ''}
+                                                `}>
+                                                    <Icon size={isCurrent ? 20 : 18} strokeWidth={isCurrent ? 3 : 2} />
                                                 </div>
 
-                                                {/* Label */}
-                                                <p className={`text-[9px] font-black uppercase tracking-wider text-center transition-colors
-                                                    ${isActive ? 'text-footerBg' : 'text-gray-300'}
-                                                `}>
-                                                    {step.label}
-                                                </p>
+                                                <div className="min-w-0">
+                                                    <p className={`text-[10px] md:text-xs font-black uppercase tracking-widest leading-none md:text-center
+                                                        ${isActive ? 'text-footerBg' : 'text-slate-300'}`}>
+                                                        {step.label}
+                                                    </p>
+                                                    {isCurrent && (
+                                                        <p className="text-[9px] font-bold text-primary mt-1 md:text-center">Active Now</p>
+                                                    )}
+                                                </div>
                                             </div>
                                         );
                                     })}
                                 </div>
-                            </div>
-                        )}
-                    </div>
+                            )}
+                        </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {/* Item Details */}
-                        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm p-6">
-                            <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-6">Original Item(s)</h3>
-                            <div className="space-y-4">
+                        {/* Items Section (Compact) */}
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+                            <div className="p-4 bg-slate-50/50 border-b border-gray-100 flex justify-between items-center">
+                                <h3 className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Original Item(s)</h3>
+                                <div className="text-primary text-[10px] font-black uppercase px-2 py-0.5 rounded-lg border border-primary/10">
+                                    ₹{returnRequest.refundAmount}
+                                </div>
+                            </div>
+                            <div className="divide-y divide-gray-50">
                                 {returnRequest.items.map((item, i) => (
-                                    <div key={i} className="flex gap-4 p-4 bg-[#F9F9F9] rounded-2xl border border-gray-50">
+                                    <div key={i} className="p-4 flex gap-4 items-center">
                                         <div className="relative shrink-0">
-                                            <div className="w-16 h-16 bg-white rounded-xl overflow-hidden border border-gray-100 p-1">
+                                            <div className="w-14 h-14 bg-slate-50 rounded-xl border border-gray-100 flex items-center justify-center p-1">
                                                 <img src={item.image} alt={item.name} className="w-full h-full object-contain mix-blend-multiply" />
                                             </div>
-                                            <span className="absolute -top-2 -right-2 min-w-[20px] h-5 px-1 bg-footerBg text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-sm">
+                                            <span className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] bg-footerBg text-white text-[9px] font-black rounded-lg flex items-center justify-center border-2 border-white shadow-sm">
                                                 {item.qty}
                                             </span>
                                         </div>
-                                        <div className="flex-1">
-                                            <p className="font-bold text-footerBg text-sm line-clamp-1">{item.name}</p>
-                                            <p className="text-xs text-gray-500 mt-1 font-medium">Qty: {item.qty} × ₹{item.price}</p>
-                                            <p className="text-xs font-black text-primary mt-1">₹{item.price * item.qty}</p>
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="text-[13px] md:text-sm font-black text-footerBg truncate mb-0.5">{item.name}</h4>
+                                            <p className="text-[11px] font-bold text-slate-400 tracking-tight">
+                                                Qty: {item.qty} <span className="mx-1 opacity-20">×</span> ₹{item.price}
+                                            </p>
+                                        </div>
+                                        <div className="text-right shrink-0">
+                                            <p className="text-[13px] md:text-sm font-black text-footerBg">₹{item.price * item.qty}</p>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <div className="mt-6 pt-4 border-t border-gray-100 flex justify-between items-center">
-                                <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">{isReplace ? 'Original Value' : 'Total Refund'}</span>
-                                <span className="text-xl font-black text-footerBg">₹{returnRequest.refundAmount}</span>
-                            </div>
                         </div>
+                    </div>
 
-                        {/* Request Details / Replacement Info */}
-                        <div className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm p-6 flex flex-col">
-                            <div className="flex-1 space-y-6">
-                                <div className="flex justify-between items-center">
-                                    <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Request Details</h3>
-                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${isReplace ? 'bg-orange-50 text-orange-600 border border-orange-100' : 'bg-emerald-50 text-emerald-600 border border-emerald-100'}`}>
-                                        {isReplace ? 'Replacement' : 'Refund'}
-                                    </span>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {isReplace && replacementVariant && (
-                                        <div className="p-4 bg-primary/5 rounded-2xl border border-primary/10">
-                                            <p className="text-[10px] font-black text-primary uppercase tracking-widest mb-3">Replacement Choice</p>
-                                            <div className="flex items-center gap-4">
-                                                <div className="w-12 h-12 bg-white rounded-lg border border-primary/20 p-1">
-                                                    <img src={replacementVariant.product.image} className="w-full h-full object-contain mix-blend-multiply" alt="" />
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm font-bold text-footerBg">{replacementVariant.product.name}</p>
-                                                    <div className="flex items-center gap-2 mt-0.5">
-                                                        <span className="text-xs font-black text-primary">{replacementVariant.weight}</span>
-                                                        <span className="text-xs text-gray-400 font-bold">₹{replacementVariant.price}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {returnRequest.priceDifference !== 0 && (
-                                                <div className="mt-3 pt-3 border-t border-primary/10 flex justify-between items-center">
-                                                    <span className="text-xs font-bold text-gray-500">Price Difference</span>
-                                                    <span className={`text-xs font-black ${returnRequest.priceDifference > 0 ? 'text-red-500' : 'text-emerald-500'}`}>
-                                                        {returnRequest.priceDifference > 0 ? `+₹${returnRequest.priceDifference} (Payable)` : `-₹${Math.abs(returnRequest.priceDifference)} (Refund)`}
-                                                    </span>
-                                                </div>
-                                            )}
-                                            {returnRequest.replacementMethod && (
-                                                <div className="mt-2 flex items-center gap-2">
-                                                    <Truck size={12} className="text-gray-400" />
-                                                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">
-                                                        Mode: {returnRequest.replacementMethod === 'advance' ? 'Advance Exchange' : 'Standard Exchange'}
-                                                    </span>
-                                                </div>
-                                            )}
-                                        </div>
-                                    )}
-
-                                    <div>
-                                        <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Reason</p>
-                                        <p className="text-sm font-bold text-footerBg leading-tight">{returnRequest.reason}</p>
-                                    </div>
-
-                                    {returnRequest.comments && (
-                                        <div>
-                                            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1 text-left">Customer Comments</p>
-                                            <p className="text-sm text-gray-500 font-medium border-l-2 border-gray-100 pl-3 text-left">"{returnRequest.comments}"</p>
-                                        </div>
-                                    )}
-                                </div>
+                    {/* Request Details Sidebar */}
+                    <div className="lg:col-span-12 xl:col-span-4 space-y-4">
+                        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-6">
+                            <div className="flex justify-between items-center bg-slate-50 p-3 rounded-xl">
+                                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Type</span>
+                                <span className={`px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest ${isReplace ? 'bg-orange-100 text-orange-600' : 'bg-emerald-100 text-emerald-600'}`}>
+                                    {isReplace ? 'Replacement' : 'Refund'}
+                                </span>
                             </div>
 
-                            <div className="bg-blue-50 p-4 rounded-xl border border-blue-100">
-                                <div className="flex items-center gap-2 mb-2">
-                                    <AlertCircle size={16} className="text-blue-600" />
-                                    <span className="font-bold text-blue-800 text-sm">Instructions</span>
+                            <div className="space-y-4">
+                                <div>
+                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest mb-1">Reason</p>
+                                    <p className="text-sm font-black text-footerBg leading-snug">{returnRequest.reason}</p>
                                 </div>
-                                <p className="text-xs text-blue-700 leading-relaxed">
-                                    Please keep the item ready for pickup. Ensure all original tags and packaging are intact. Our executive will contact you before arriving.
+
+                                {returnRequest.comments && (
+                                    <div>
+                                        <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest mb-1">Comments</p>
+                                        <p className="text-[11px] font-medium text-slate-400 italic leading-relaxed border-l-2 border-slate-100 pl-3">
+                                            "{returnRequest.comments}"
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Replacement Choice (if applicable) */}
+                            {isReplace && replacementVariant && (
+                                <div className="p-3 bg-primary/5 rounded-xl border border-primary/10 space-y-3">
+                                    <p className="text-[9px] font-black text-primary uppercase tracking-widest">Replacement Item</p>
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 bg-white rounded-lg border border-primary/10 p-1 flex items-center justify-center shrink-0">
+                                            <img src={replacementVariant.product.image} className="w-full h-full object-contain mix-blend-multiply" alt="" />
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="text-xs font-black text-footerBg truncate">{replacementVariant.product.name}</p>
+                                            <p className="text-[10px] font-bold text-primary">{replacementVariant.weight}</p>
+                                        </div>
+                                    </div>
+                                    {returnRequest.priceDifference !== 0 && (
+                                        <div className="pt-2 border-t border-primary/10 flex justify-between items-center text-[10px]">
+                                            <span className="font-bold text-slate-500">Difference</span>
+                                            <span className={`font-black ${returnRequest.priceDifference > 0 ? 'text-red-500' : 'text-emerald-500'}`}>
+                                                {returnRequest.priceDifference > 0 ? `+₹${returnRequest.priceDifference}` : `-₹${Math.abs(returnRequest.priceDifference)}`}
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            <div className="pt-5 border-t border-gray-50 flex items-center gap-3 bg-blue-50/50 p-4 -m-5 mt-5">
+                                <AlertCircle size={16} className="text-blue-600 shrink-0" />
+                                <p className="text-[10px] font-bold text-blue-700 leading-snug">
+                                    Keep tags and packaging intact. Our executive will call before pickup.
                                 </p>
                             </div>
                         </div>

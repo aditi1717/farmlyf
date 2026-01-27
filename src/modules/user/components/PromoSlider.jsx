@@ -25,8 +25,8 @@ const PromoSlider = () => {
     if (banners.length === 0) return null;
 
     return (
-        <section className="w-full bg-background py-6 md:py-10 px-4 md:px-12 font-['Inter']">
-            <div className="relative w-full h-[280px] md:h-[400px] overflow-hidden rounded-[2.5rem] shadow-xl bg-black group">
+        <section className="w-full bg-background py-4 md:py-10 px-3 md:px-12 font-['Inter']">
+            <div className="relative w-full h-[220px] md:h-[400px] overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] shadow-xl bg-black group">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
@@ -43,24 +43,24 @@ const PromoSlider = () => {
                             className="w-full h-full object-cover"
                         />
 
-                        <div className="absolute inset-0 z-20 flex flex-col justify-center px-8 md:px-16 text-white pointer-events-none">
+                        <div className="absolute inset-0 z-20 flex flex-col justify-center px-5 md:px-16 text-white pointer-events-none">
                             <motion.div
                                 initial={{ y: 15, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.3 }}
-                                className="flex items-center gap-3 mb-4"
+                                className="flex items-center gap-2 md:gap-3 mb-2 md:mb-4"
                             >
-                                <span className="bg-primary text-white text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full shadow-lg">
+                                <span className="bg-primary text-white text-[8px] md:text-[10px] font-black uppercase tracking-[0.2em] px-2 py-0.5 md:px-3 md:py-1 rounded-full shadow-lg">
                                     {banners[currentIndex].badgeText}
                                 </span>
-                                <div className="h-[1px] w-12 bg-white/30" />
+                                <div className="h-[1px] w-8 md:w-12 bg-white/30" />
                             </motion.div>
 
                             <motion.h2
                                 initial={{ y: 15, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.4 }}
-                                className="text-2xl md:text-5xl font-black mb-3 font-['Poppins'] leading-tight max-w-xl text-white drop-shadow-md"
+                                className="text-xl md:text-5xl font-black mb-2 md:mb-3 font-['Poppins'] leading-tight max-w-xl text-white drop-shadow-md"
                             >
                                 {banners[currentIndex].title}
                             </motion.h2>
@@ -78,7 +78,7 @@ const PromoSlider = () => {
                                 initial={{ scale: 0.9, opacity: 0 }}
                                 animate={{ scale: 1, opacity: 1 }}
                                 transition={{ delay: 0.6 }}
-                                className="pointer-events-auto bg-primary hover:bg-primaryHover text-white font-bold text-[10px] md:text-sm uppercase tracking-widest px-6 py-3 rounded-full transition-all shadow-xl active:scale-95 w-fit flex items-center gap-2 group/btn"
+                                className="pointer-events-auto bg-primary hover:bg-primaryHover text-white font-bold text-[9px] md:text-sm uppercase tracking-widest px-4 py-2 md:px-6 md:py-3 rounded-full transition-all shadow-xl active:scale-95 w-fit flex items-center gap-2 group/btn"
                             >
                                 Explore Collection
                                 <div className="w-4 h-4 rounded-full bg-white/20 flex items-center justify-center group-hover/btn:translate-x-1 transition-transform">

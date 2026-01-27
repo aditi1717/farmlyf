@@ -29,7 +29,7 @@ const HeroSection = () => {
     const currentSlide = banners[currentIndex];
 
     return (
-        <div className="w-full bg-background py-6 md:py-10 px-4 md:px-12">
+        <div className="w-full bg-background py-2 md:py-6 px-3 md:px-12">
             <div className="w-full">
                 <div className="relative w-full rounded-3xl overflow-hidden aspect-[16/9] md:aspect-[21/6] bg-[#fdfdfd] shadow-2xl border border-mint/20 group">
 
@@ -57,18 +57,18 @@ const HeroSection = () => {
                             </div>
 
                             {/* Left Side Content */}
-                            <div className="z-30 space-y-1 md:space-y-2 max-w-md mt-28 md:mt-16 md:ml-4 relative text-shadow-sm">
+                            <div className="z-30 space-y-0.5 md:space-y-2 max-w-[75%] md:max-w-md mt-12 md:mt-16 md:ml-4 relative text-shadow-sm">
                                 <motion.div
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.2 }}
-                                    className="flex flex-wrap items-center gap-2 mb-2"
+                                    className="flex flex-wrap items-center gap-1.5 md:gap-2 mb-1 md:mb-2"
                                 >
-                                    <span className="bg-offerRed text-white text-[9px] md:text-[10px] font-bold px-2.5 py-1 rounded-full shadow-lg uppercase">
+                                    <span className="bg-offerRed text-white text-[7px] md:text-[10px] font-bold px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full shadow-lg uppercase">
                                         LIMITED TIME
                                     </span>
                                     {currentSlide.badgeText && (
-                                        <span className="text-white bg-primary px-2.5 py-1 rounded-full font-bold text-[9px] md:text-[10px] tracking-widest uppercase shadow-md">
+                                        <span className="text-white bg-primary px-1.5 py-0.5 md:px-2.5 md:py-1 rounded-full font-bold text-[7px] md:text-[10px] tracking-widest uppercase shadow-md">
                                             {currentSlide.badgeText}
                                         </span>
                                     )}
@@ -78,7 +78,7 @@ const HeroSection = () => {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.3 }}
-                                    className="text-3xl md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg leading-tight"
+                                    className="text-lg md:text-5xl lg:text-5xl font-black text-white drop-shadow-lg leading-none md:leading-tight"
                                 >
                                     {currentSlide.title}
                                 </motion.h1>
@@ -87,7 +87,7 @@ const HeroSection = () => {
                                     initial={{ y: 20, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.4 }}
-                                    className="text-white/95 text-xs md:text-lg font-bold max-w-xs leading-snug drop-shadow-md mb-4"
+                                    className="text-white/95 text-[9px] md:text-lg font-bold max-w-xs leading-tight drop-shadow-md mb-1.5 md:mb-4"
                                 >
                                     {currentSlide.subtitle}
                                 </motion.p>
@@ -97,19 +97,20 @@ const HeroSection = () => {
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ delay: 0.5 }}
                                     onClick={() => currentSlide.link && navigate(currentSlide.link)}
-                                    className="mt-3 bg-primary hover:bg-primaryHover text-white px-6 py-2.5 md:px-8 md:py-3 rounded-full font-bold text-sm md:text-base flex items-center gap-2 transition-all shadow-xl active:scale-95"
+                                    className="mt-1 md:mt-3 bg-primary hover:bg-primaryHover text-white px-3 py-1.5 md:px-8 md:py-3 rounded-full font-bold text-[10px] md:text-base flex items-center gap-1 md:gap-2 transition-all shadow-xl active:scale-95"
                                 >
-                                    {currentSlide.ctaText || 'Shop Now'} <ArrowRight size={18} />
+                                    {currentSlide.ctaText || 'Shop Now'} <ArrowRight size={12} className="md:w-[18px] md:h-[18px]" />
                                 </motion.button>
                             </div>
                         </motion.div>
                     </AnimatePresence>
 
                     {/* Static Branding Overlay */}
-                    <div className="absolute top-4 left-6 md:left-12 z-40 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/20">
-                        <span className="text-[10px] tracking-[0.2em] uppercase text-white/80 font-bold block">Passion for Nutrition</span>
-                        <div className="flex items-center gap-1.5">
-                            <img src={logo} alt="FarmLyf" className="h-6 w-auto object-contain" />
+                    {/* Static Branding Overlay */}
+                    <div className="absolute top-3 left-4 md:left-12 z-40 bg-white/10 backdrop-blur-md px-2 py-1 md:px-3 md:py-1.5 rounded-lg border border-white/20">
+                        <span className="text-[8px] md:text-[10px] tracking-[0.1em] md:tracking-[0.2em] uppercase text-white/80 font-bold block">Passion for Nutrition</span>
+                        <div className="flex items-center gap-1 md:gap-1.5">
+                            <img src={logo} alt="FarmLyf" className="h-4 md:h-6 w-auto object-contain" />
                         </div>
                     </div>
 

@@ -18,7 +18,7 @@ const Navbar = () => {
             <div className="flex justify-between items-center gap-4 md:gap-8">
                 {/* Logo */}
                 <Link to="/" className="flex-shrink-0 flex items-center gap-1.5">
-                    <img src={logo} alt="FarmLyf" className="h-9 md:h-11 w-auto object-contain" />
+                    <img src={logo} alt="FarmLyf" className="h-7 md:h-9 w-auto object-contain" />
                 </Link>
 
                 {/* Search Bar */}

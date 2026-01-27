@@ -165,90 +165,93 @@ const CheckoutPage = () => {
     }
 
     return (
-        <div className="bg-[#fcfcfc] min-h-screen py-12">
-            <div className="container mx-auto px-4 md:px-12">
-                <div className="flex items-center gap-4 mb-10">
-                    <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
-                        <ArrowLeft size={24} />
+        <div className="bg-[#fcfcfc] min-h-screen py-4 md:py-12">
+            <div className="container mx-auto px-3 md:px-12">
+                <div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-10">
+                    <button onClick={() => navigate(-1)} className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors text-footerBg/70">
+                        <ArrowLeft size={20} md:size={24} />
                     </button>
-                    <h1 className="text-3xl font-black text-footerBg uppercase tracking-tight">Checkout</h1>
+                    <div>
+                        <h1 className="text-xl md:text-3xl font-black text-footerBg uppercase tracking-tighter md:tracking-tight leading-none">Checkout</h1>
+                        <p className="text-[8px] md:text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mt-1">Complete your order</p>
+                    </div>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12">
                     {/* Left Column: Forms */}
                     <div className="space-y-8">
                         {/* Shipping Address */}
-                        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                            <h3 className="text-xl font-bold text-footerBg mb-6 flex items-center gap-2">
-                                <Truck size={20} className="text-primary" />
-                                Shipping Address
+                        <div className="bg-white p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm">
+                            <h3 className="text-lg md:text-xl font-bold text-footerBg mb-4 md:mb-6 flex items-center gap-2">
+                                <Truck size={18} className="text-primary" />
+                                Delivery Details
                             </h3>
-                            <form id="checkout-form" onSubmit={handleSubmit} className="space-y-4">
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-bold text-gray-500 uppercase">Full Name</label>
+                            <form id="checkout-form" onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+                                <div className="grid grid-cols-2 gap-3 md:gap-4">
+                                    <div className="space-y-1 text-left">
+                                        <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Full Name</label>
                                         <input
                                             required
                                             name="fullName"
                                             value={formData.fullName}
                                             onChange={handleInputChange}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                                            placeholder="John Doe"
+                                            className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            placeholder="Ex: John Doe"
                                         />
                                     </div>
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-bold text-gray-500 uppercase">Phone</label>
+                                    <div className="space-y-1 text-left">
+                                        <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Phone</label>
                                         <input
                                             required
                                             name="phone"
                                             value={formData.phone}
                                             onChange={handleInputChange}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                                            placeholder="+91 98765 43210"
+                                            className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            placeholder="+91"
                                         />
                                     </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="text-xs font-bold text-gray-500 uppercase">Address</label>
+                                <div className="space-y-1 text-left">
+                                    <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Detailed Address</label>
                                     <textarea
                                         required
                                         name="address"
                                         value={formData.address}
                                         onChange={handleInputChange}
-                                        rows="3"
-                                        className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                                        placeholder="Flat No, Building, Street"
+                                        rows="2"
+                                        className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                                        placeholder="Flat No, Building, Area"
                                     />
                                 </div>
-                                <div className="grid grid-cols-3 gap-4">
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-bold text-gray-500 uppercase">City</label>
+                                <div className="grid grid-cols-3 gap-2 md:gap-4">
+                                    <div className="space-y-1 text-left">
+                                        <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">City</label>
                                         <input
                                             required
                                             name="city"
                                             value={formData.city}
                                             onChange={handleInputChange}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-bold text-gray-500 uppercase">State</label>
-                                        <input
-                                            required
-                                            name="state"
-                                            value={formData.state}
-                                            onChange={handleInputChange}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                                        />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <label className="text-xs font-bold text-gray-500 uppercase">Pincode</label>
+                                    <div className="space-y-1 text-left">
+                                        <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">Pincode</label>
                                         <input
                                             required
                                             name="pincode"
                                             value={formData.pincode}
                                             onChange={handleInputChange}
-                                            className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                            className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                                        />
+                                    </div>
+                                    <div className="space-y-1 text-left">
+                                        <label className="text-[10px] md:text-xs font-bold text-gray-400 uppercase">State</label>
+                                        <input
+                                            required
+                                            name="state"
+                                            value={formData.state}
+                                            onChange={handleInputChange}
+                                            className="w-full bg-gray-50/50 border border-gray-100 rounded-lg px-3 md:px-4 py-2 md:py-3 text-sm focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                         />
                                     </div>
                                 </div>
@@ -256,110 +259,102 @@ const CheckoutPage = () => {
                         </div>
 
                         {/* Payment Method */}
-                        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                            <h3 className="text-xl font-bold text-footerBg mb-6 flex items-center gap-2">
-                                <CreditCard size={20} className="text-primary" />
+                        <div className="bg-white p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm">
+                            <h3 className="text-lg md:text-xl font-bold text-footerBg mb-4 md:mb-6 flex items-center gap-2">
+                                <CreditCard size={18} className="text-primary" />
                                 Payment Method
                             </h3>
-                            <div className="space-y-3">
-                                <label className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'cod' ? 'border-primary bg-primary/5' : 'border-gray-100 hover:border-gray-200'}`}>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                                <label className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'cod' ? 'border-primary bg-primary/5' : 'border-gray-50 hover:border-gray-100'}`}>
                                     <input
                                         type="radio"
                                         name="payment"
                                         value="cod"
                                         checked={paymentMethod === 'cod'}
                                         onChange={() => setPaymentMethod('cod')}
-                                        className="w-5 h-5 text-primary focus:ring-primary"
+                                        className="w-4 h-4 text-primary focus:ring-primary"
                                     />
                                     <div className="flex-1">
-                                        <div className="font-bold text-footerBg flex items-center gap-2">
-                                            <Banknote size={16} /> Cash on Delivery
+                                        <div className="font-bold text-footerBg flex items-center gap-2 text-sm md:text-base">
+                                            <Banknote size={14} /> Cash on Delivery
                                         </div>
-                                        <div className="text-sm text-gray-500">Pay when you receive the order</div>
+                                        <div className="text-[10px] md:text-sm text-gray-500">COD Available</div>
                                     </div>
                                 </label>
 
-                                <label className={`flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'online' ? 'border-primary bg-primary/5' : 'border-gray-100 hover:border-gray-200'}`}>
+                                <label className={`flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl border-2 cursor-pointer transition-all ${paymentMethod === 'online' ? 'border-primary bg-primary/5' : 'border-gray-50 hover:border-gray-100'}`}>
                                     <input
                                         type="radio"
                                         name="payment"
                                         value="online"
                                         checked={paymentMethod === 'online'}
                                         onChange={() => setPaymentMethod('online')}
-                                        className="w-5 h-5 text-primary focus:ring-primary"
+                                        className="w-4 h-4 text-primary focus:ring-primary"
                                     />
                                     <div className="flex-1">
-                                        <div className="font-bold text-footerBg flex items-center gap-2">
-                                            <CreditCard size={16} /> Online Payment (UPI / Card)
+                                        <div className="font-bold text-footerBg flex items-center gap-2 text-sm md:text-base">
+                                            <CreditCard size={14} /> UPI/Card
                                         </div>
-                                        <div className="text-sm text-gray-500">Secure payment gateway</div>
+                                        <div className="text-[10px] md:text-sm text-gray-500">Secure Online</div>
                                     </div>
                                 </label>
                             </div>
                         </div>
 
                         {/* Apply Coupon */}
-                        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-                            <h3 className="text-xl font-bold text-footerBg mb-6 flex items-center gap-2">
-                                <Tag size={20} className="text-primary" />
+                        <div className="bg-white p-4 md:p-6 rounded-xl md:rounded-2xl border border-gray-100 shadow-sm">
+                            <h3 className="text-lg md:text-xl font-bold text-footerBg mb-4 md:mb-6 flex items-center gap-2">
+                                <Tag size={18} className="text-primary" />
                                 Apply Coupon
                             </h3>
 
                             {!appliedCoupon ? (
-                                <div className="space-y-4">
-                                    <div className="flex gap-3">
+                                <div className="space-y-3 md:space-y-4">
+                                    <div className="flex gap-2">
                                         <input
                                             type="text"
-                                            placeholder="Enter coupon code"
+                                            placeholder="Coupon Code"
                                             value={couponCode}
                                             onChange={(e) => {
                                                 setCouponCode(e.target.value.toUpperCase());
                                                 setCouponError('');
                                             }}
-                                            className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all uppercase font-bold text-sm"
+                                            className="flex-1 bg-gray-50/50 border border-gray-100 rounded-lg px-3 py-2 md:py-3 focus:ring-2 focus:ring-primary/20 outline-none transition-all uppercase font-bold text-xs md:text-sm"
                                         />
                                         <button
                                             type="button"
                                             onClick={handleApplyCoupon}
-                                            className="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all shadow-sm whitespace-nowrap"
+                                            className="bg-footerBg text-white px-4 md:px-6 py-2 md:py-3 rounded-lg font-black text-[10px] md:text-xs uppercase tracking-widest hover:bg-opacity-90 transition-all shadow-sm"
                                         >
                                             Apply
                                         </button>
                                     </div>
-
-                                    {couponError && (
-                                        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl text-sm flex items-center gap-2">
-                                            <X size={16} />
-                                            {couponError}
-                                        </div>
-                                    )}
-
                                     <button
                                         type="button"
                                         onClick={() => setShowCouponsModal(true)}
-                                        className="text-primary text-sm font-bold hover:underline flex items-center gap-1"
+                                        className="text-primary text-[10px] md:text-sm font-bold hover:underline flex items-center gap-1"
                                     >
-                                        <Tag size={14} />
-                                        View Available Coupons ({availableCoupons.length})
+                                        <Tag size={12} />
+                                        View All Coupons ({availableCoupons.length})
                                     </button>
                                 </div>
                             ) : (
-                                <div className="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-4 flex items-center justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-                                            <Percent size={18} className="text-emerald-600" />
+                                <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 md:p-4 flex items-center justify-between">
+                                    <div className="flex items-center gap-2 md:gap-3">
+                                        <div className="w-8 h-8 md:w-10 md:h-10 bg-white rounded-full flex items-center justify-center border border-emerald-100">
+                                            <Percent size={14} className="text-emerald-500" />
                                         </div>
                                         <div>
-                                            <p className="font-black text-emerald-700 text-sm uppercase tracking-wider">{appliedCoupon.code}</p>
-                                            <p className="text-xs text-emerald-600 font-medium">You saved ₹{couponDiscount}!</p>
+                                            <p className="font-black text-emerald-600 text-[10px] md:text-sm uppercase tracking-wider">{appliedCoupon.code}</p>
+                                            <p className="text-[9px] md:text-xs text-emerald-500 font-bold">Saved ₹{couponDiscount}!</p>
                                         </div>
                                     </div>
                                     <button
                                         type="button"
                                         onClick={handleRemoveCoupon}
-                                        className="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors"
+                                        className="text-gray-300 hover:text-red-500 p-1 transition-colors"
                                     >
-                                        <X size={18} />
+                                        <X size={16} />
                                     </button>
                                 </div>
                             )}
@@ -370,49 +365,49 @@ const CheckoutPage = () => {
 
                     {/* Right Column: Order Summary */}
                     <div className="h-fit sticky top-28">
-                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-lg relative overflow-hidden">
-                            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary to-footerBg" />
+                        <div className="bg-white p-5 md:p-8 rounded-2xl md:rounded-3xl border border-gray-100 shadow-xl relative overflow-hidden">
+                            <div className="absolute top-0 left-0 w-full h-1 md:h-2 bg-gradient-to-r from-primary to-footerBg" />
 
-                            <h2 className="text-xl font-black text-footerBg uppercase tracking-tight mb-6">Order Summary</h2>
+                            <h2 className="text-lg md:text-xl font-black text-footerBg uppercase tracking-tight mb-4 md:mb-6">Order Summary</h2>
 
-                            <div className="max-h-60 overflow-y-auto pr-2 space-y-4 mb-6 custom-scrollbar">
+                            <div className="max-h-48 md:max-h-60 overflow-y-auto pr-2 space-y-3 md:space-y-4 mb-4 md:mb-6 custom-scrollbar">
                                 {enrichedCart.map((item) => (
-                                    <div key={item.id} className="flex gap-4">
-                                        <div className="w-16 h-16 bg-gray-50 rounded-lg overflow-hidden shrink-0">
+                                    <div key={item.id} className="flex gap-3 md:gap-4 border-b border-gray-50 pb-3 last:border-0 last:pb-0">
+                                        <div className="w-12 h-12 md:w-16 md:h-16 bg-gray-50 rounded-lg overflow-hidden shrink-0">
                                             <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                         </div>
-                                        <div className="flex-1">
-                                            <h4 className="text-sm font-bold text-footerBg line-clamp-1">{item.name}</h4>
+                                        <div className="flex-1 min-w-0">
+                                            <h4 className="text-xs md:text-sm font-bold text-footerBg line-clamp-2 md:line-clamp-1 truncate-none whitespace-normal leading-tight">{item.name}</h4>
                                             <div className="flex justify-between items-center mt-1">
                                                 <div className="flex flex-col">
-                                                    <span className="text-xs text-gray-500">Qty: {item.qty}</span>
+                                                    <span className="text-[10px] md:text-xs text-gray-400">Qty: {item.qty}</span>
                                                     {item.weight && <span className="text-[10px] text-primary font-bold">{item.weight}</span>}
                                                 </div>
-                                                <span className="text-sm font-bold">₹{item.price * item.qty}</span>
+                                                <span className="text-xs md:text-sm font-black text-footerBg">₹{item.price * item.qty}</span>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
 
-                            <div className="space-y-3 pt-4 border-t border-gray-100">
-                                <div className="flex justify-between text-gray-500 text-sm">
+                            <div className="space-y-2 md:space-y-3 pt-3 md:pt-4 border-t border-gray-100">
+                                <div className="flex justify-between text-gray-500 text-[11px] md:text-sm">
                                     <span>Subtotal</span>
-                                    <span>₹{subtotal}</span>
+                                    <span className="font-bold text-footerBg">₹{subtotal}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-500 text-sm">
-                                    <span>Shipping</span>
-                                    <span className="text-emerald-500 font-bold">FREE</span>
+                                <div className="flex justify-between text-gray-500 text-[11px] md:text-sm">
+                                    <span>Delivery</span>
+                                    <span className="text-emerald-500 font-bold italic">FREE</span>
                                 </div>
                                 {couponDiscount > 0 && (
-                                    <div className="flex justify-between text-emerald-600 text-sm font-bold">
-                                        <span>Coupon Discount ({appliedCoupon.code})</span>
+                                    <div className="flex justify-between text-emerald-500 text-[11px] md:text-sm font-black">
+                                        <span>Saving ({appliedCoupon.code})</span>
                                         <span>-₹{couponDiscount}</span>
                                     </div>
                                 )}
 
-                                <div className="flex justify-between text-xl font-black text-footerBg pt-2">
-                                    <span>Total</span>
+                                <div className="flex justify-between text-lg md:text-xl font-black text-footerBg pt-2">
+                                    <span className="text-sm md:text-lg">Total</span>
                                     <span>₹{total}</span>
                                 </div>
                             </div>
@@ -421,13 +416,13 @@ const CheckoutPage = () => {
                                 form="checkout-form"
                                 type="submit"
                                 disabled={loading}
-                                className="w-full bg-footerBg text-white py-4 rounded-xl font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg mt-8 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full bg-footerBg text-white py-3 md:py-4 rounded-xl font-black text-[11px] md:text-xs uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg mt-5 md:mt-8 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-95"
                             >
-                                {loading ? 'Processing...' : `Place Order • ₹${total}`}
+                                {loading ? 'Securing Order...' : `Place Order • ₹${total}`}
                             </button>
 
-                            <p className="text-xs text-center text-gray-400 mt-4">
-                                By placing an order, you agree to our Terms and Conditions.
+                            <p className="text-[9px] md:text-xs text-center text-gray-400 mt-3 md:mt-4">
+                                Secure Checkout with FarmLyf
                             </p>
                         </div>
                     </div>

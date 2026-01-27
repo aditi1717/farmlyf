@@ -19,55 +19,55 @@ import logo from '../../../assets/logo.png';
 
 const Footer = () => {
     return (
-        <footer className="bg-footerBg text-white pt-20 pb-10 px-4 md:px-12 relative overflow-hidden">
+        <footer className="bg-footerBg text-white pt-10 md:pt-20 pb-10 px-4 md:px-12 relative overflow-hidden">
             {/* Newsletter Section */}
-            <div className="container mx-auto mb-20">
-                <div className="bg-primary/10 rounded-[3rem] p-8 md:p-12 border border-primary/20 flex flex-col md:flex-row items-center justify-between gap-10">
-                    <div className="space-y-4 text-center md:text-left">
-                        <h3 className="text-3xl font-brand font-bold tracking-tight flex items-center gap-2 justify-center md:justify-start">
-                            Join the <img src={logo} alt="FarmLyf" className="h-8 w-auto object-contain" /> Family!
+            <div className="container mx-auto mb-12 md:mb-20">
+                <div className="bg-primary/10 rounded-[2rem] md:rounded-[3rem] p-5 md:p-12 border border-primary/20 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
+                    <div className="space-y-2 md:space-y-4 text-center md:text-left">
+                        <h3 className="text-xl md:text-3xl font-brand font-bold tracking-tight flex items-center gap-2 justify-center md:justify-start">
+                            Join the <img src={logo} alt="FarmLyf" className="h-5 md:h-8 w-auto object-contain" /> Family!
                         </h3>
-                        <p className="text-gray-400 max-w-md">Subscribe to get exclusive offers, healthy recipes, and the first taste of our new premium dry fruits.</p>
+                        <p className="text-gray-400 text-xs md:text-base max-w-md">Subscribe for exclusive offers and healthy dry fruit recipes.</p>
                     </div>
-                    <div className="flex w-full md:w-auto gap-3">
+                    <div className="flex w-full md:w-auto gap-2 md:gap-3">
                         <input
                             type="email"
-                            placeholder="Your email address"
-                            className="bg-white/5 border border-white/10 rounded-full px-6 py-4 flex-grow md:w-80 focus:outline-none focus:border-primary transition-colors text-sm"
+                            placeholder="Email address"
+                            className="bg-white/5 border border-white/10 rounded-full px-4 md:px-6 py-3 md:py-4 flex-grow md:w-80 focus:outline-none focus:border-primary transition-colors text-xs md:text-sm"
                         />
-                        <button className="bg-primary hover:bg-primaryHover text-white px-8 py-4 rounded-full font-bold text-sm transition-all shadow-lg active:scale-95 whitespace-nowrap">
+                        <button className="bg-primary hover:bg-primaryHover text-white px-5 md:px-8 py-3 md:py-4 rounded-full font-bold text-xs md:text-sm transition-all shadow-lg active:scale-95 whitespace-nowrap">
                             Join Now
                         </button>
                     </div>
                 </div>
             </div>
 
-            <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 mb-20">
-                {/* Brand Column */}
-                <div className="space-y-8">
+            <div className="container mx-auto grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-8 mb-16 md:mb-20">
+                {/* Brand Column - Full width on very small screens or just part of grid */}
+                <div className="col-span-2 lg:col-span-1 space-y-4 md:space-y-8 mb-4 md:mb-0">
                     <Link to="/" className="inline-block">
-                        <img src={logo} alt="FarmLyf" className="h-10 w-auto object-contain" />
+                        <img src={logo} alt="FarmLyf" className="h-8 md:h-10 w-auto object-contain" />
                     </Link>
-                    <p className="text-gray-400 leading-relaxed">
-                        Bringing you the finest, hand-picked dry fruits from around the globe. We believe in quality that nourishes and flavors that delight.
+                    <p className="text-gray-400 text-xs md:text-base leading-relaxed">
+                        Fine, hand-picked dry fruits from around the globe. Quality that nourishes.
                     </p>
-                    <div className="flex gap-4">
+                    <div className="flex gap-3 md:gap-4">
                         {[Facebook, Instagram, Twitter].map((Icon, i) => (
-                            <Link key={i} to="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all">
-                                <Icon size={18} />
+                            <Link key={i} to="#" className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all">
+                                <Icon size={16} md:size={18} />
                             </Link>
                         ))}
                     </div>
                 </div>
 
                 {/* Quick Links */}
-                <div>
-                    <h4 className="text-lg font-bold mb-8 font-['Poppins']">Quick Shop</h4>
-                    <ul className="space-y-4 text-gray-400">
-                        {['Daily Health Packs', 'Grand Family Packs', 'Energy & Fitness', 'Traditional Festival', 'Executive Gifting'].map((item, i) => (
+                <div className="col-span-1">
+                    <h4 className="text-sm md:text-lg font-bold mb-4 md:mb-8 font-['Poppins']">Quick Shop</h4>
+                    <ul className="space-y-2 md:space-y-4 text-gray-400">
+                        {['Daily Health', 'Family Packs', 'Energy & Fitness', 'Festival', 'Gifting'].map((item, i) => (
                             <li key={i}>
-                                <Link to="#" className="hover:text-primary transition-colors flex items-center gap-2 group text-sm">
-                                    <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                                <Link to="#" className="hover:text-primary transition-colors flex items-center gap-2 group text-[11px] md:text-sm">
+                                    <ArrowRight size={12} md:size={14} className="group-hover:translate-x-1 transition-transform" />
                                     {item}
                                 </Link>
                             </li>
@@ -76,19 +76,19 @@ const Footer = () => {
                 </div>
 
                 {/* Support Links */}
-                <div>
-                    <h4 className="text-lg font-bold mb-8 font-['Poppins']">Information</h4>
-                    <ul className="space-y-4 text-gray-400 text-sm">
+                <div className="col-span-1">
+                    <h4 className="text-sm md:text-lg font-bold mb-4 md:mb-8 font-['Poppins']">Information</h4>
+                    <ul className="space-y-2 md:space-y-4 text-gray-400 text-[11px] md:text-sm">
                         {[
                             { name: 'About Us', path: '/about-us' },
-                            { name: 'Track Your Order', path: '/orders' },
-                            { name: 'Return & Refunds', path: '/returns' },
-                            { name: 'Privacy Policy', path: '/privacy-policy' },
-                            { name: 'Terms of Service', path: '#' }
+                            { name: 'Track Order', path: '/orders' },
+                            { name: 'Returns', path: '/returns' },
+                            { name: 'Privacy', path: '/privacy-policy' },
+                            { name: 'Terms', path: '#' }
                         ].map((item, i) => (
                             <li key={i}>
                                 <Link to={item.path} className="hover:text-primary transition-colors flex items-center gap-2 group">
-                                    <ArrowRight size={14} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                                    <ArrowRight size={12} md:size={14} className="group-hover:translate-x-1 transition-transform" />
                                     {item.name}
                                 </Link>
                             </li>
@@ -97,42 +97,38 @@ const Footer = () => {
                 </div>
 
                 {/* Contact Info */}
-                <div>
-                    <h4 className="text-lg font-bold mb-8 font-['Poppins']">Contact Us</h4>
-                    <ul className="space-y-6 text-gray-400 text-sm">
-                        <li className="flex gap-4">
-                            <MapPin className="text-primary shrink-0" size={20} />
-                            <span>Office No 501, Princess center, 5th Floor, <br />New Palasia, Indore, Madhya Pradesh 452001</span>
+                <div className="col-span-2 lg:col-span-1 mt-4 md:mt-0">
+                    <h4 className="text-sm md:text-lg font-bold mb-4 md:mb-8 font-['Poppins']">Contact Us</h4>
+                    <ul className="space-y-3 md:space-y-6 text-gray-400 text-[11px] md:text-sm">
+                        <li className="flex gap-3 md:gap-4">
+                            <MapPin className="text-primary shrink-0" size={16} md:size={20} />
+                            <span>Office No 501, Princess center, 5th Floor, <br />New Palasia, Indore, 452001</span>
                         </li>
-                        <li className="flex gap-4">
-                            <Phone className="text-primary shrink-0" size={20} />
+                        <li className="flex gap-3 md:gap-4">
+                            <Phone className="text-primary shrink-0" size={16} md:size={20} />
                             <span>+91 98765 43210</span>
-                        </li>
-                        <li className="flex gap-4">
-                            <Mail className="text-primary shrink-0" size={20} />
-                            <span>hello@farmlyf.com</span>
                         </li>
                     </ul>
                 </div>
             </div>
 
             {/* Trust Badges */}
-            <div className="container mx-auto border-t border-white/5 pt-10 pb-20 flex flex-wrap justify-center md:justify-between items-center gap-8">
-                <div className="flex items-center gap-3 text-sm text-gray-400 bg-white/5 px-6 py-3 rounded-2xl">
-                    <Award className="text-primary" size={20} />
+            <div className="container mx-auto border-t border-white/5 pt-8 md:pt-10 pb-10 md:pb-20 flex flex-wrap justify-center md:justify-between items-center gap-4 md:gap-8">
+                <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-sm text-gray-400 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl">
+                    <Award className="text-primary" size={16} md:size={20} />
                     <span>Certified Quality</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400 bg-white/5 px-6 py-3 rounded-2xl">
-                    <Truck className="text-primary" size={20} />
+                <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-sm text-gray-400 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl">
+                    <Truck className="text-primary" size={16} md:size={20} />
                     <span>Pan-India Delivery</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400 bg-white/5 px-6 py-3 rounded-2xl">
-                    <ShieldCheck className="text-primary" size={20} />
+                <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-sm text-gray-400 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl">
+                    <ShieldCheck className="text-primary" size={16} md:size={20} />
                     <span>Secure Checkout</span>
                 </div>
-                <div className="flex items-center gap-3 text-sm text-gray-400 bg-white/5 px-6 py-3 rounded-2xl">
-                    <RotateCcw className="text-primary" size={20} />
-                    <span>7-Day Return Policy</span>
+                <div className="flex items-center gap-2 md:gap-3 text-[10px] md:text-sm text-gray-400 bg-white/5 px-4 md:px-6 py-2 md:py-3 rounded-xl md:rounded-2xl">
+                    <RotateCcw className="text-primary" size={16} md:size={20} />
+                    <span>7-Day Return</span>
                 </div>
             </div>
 

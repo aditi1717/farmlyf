@@ -46,82 +46,69 @@ const ReturnsPage = () => {
     };
 
     return (
-        <div className="bg-[#fcfcfc] min-h-screen py-12">
-            <div className="px-4 md:px-12 w-full">
-                <div className="flex items-center gap-4 mb-10">
-                    <button onClick={() => navigate('/orders')} className="p-2 -ml-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500">
-                        <ArrowLeft size={24} />
+        <div className="bg-[#fcfcfc] min-h-screen py-4 md:py-12">
+            <div className="container mx-auto px-3 md:px-12">
+                <div className="flex items-center gap-2 md:gap-4 mb-6 md:mb-10">
+                    <button onClick={() => navigate('/orders')} className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors text-footerBg/70">
+                        <ArrowLeft size={20} md:size={24} />
                     </button>
                     <div>
-                        <h1 className="text-2xl md:text-3xl font-black text-footerBg uppercase tracking-tight">Returns & Refunds</h1>
-                        <p className="text-[10px] md:text-xs text-gray-500 font-bold uppercase tracking-widest mt-0.5">Manage Your Requests</p>
+                        <h1 className="text-xl md:text-3xl font-black text-footerBg uppercase tracking-tighter md:tracking-tight leading-none">Returns</h1>
+                        <p className="text-[8px] md:text-[10px] text-slate-400 font-black uppercase tracking-[0.2em] mt-1">Manage Your Requests</p>
                     </div>
                 </div>
 
-                <div className="max-w-5xl mx-auto space-y-6">
+                <div className="max-w-4xl mx-auto space-y-4 md:space-y-6">
                     {returns.map((request, index) => (
                         <motion.div
                             key={request.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all"
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.05 }}
+                            className="bg-white rounded-xl md:rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-all"
                         >
-                            <div className="p-6 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gray-50/50">
-                                <div className="space-y-1">
-                                    <div className="flex items-center gap-3">
-                                        <span className="font-mono font-bold text-footerBg text-lg tracking-tighter">{request.id}</span>
-                                        <span className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border transition-all ${getStatusColor(request.status)}`}>
-                                            {request.status}
-                                        </span>
-                                    </div>
-                                    <p className="text-xs text-gray-400 font-bold uppercase tracking-widest flex items-center gap-2">
-                                        <Clock size={10} />
-                                        {new Date(request.requestDate).toLocaleDateString()}
-                                    </p>
-                                </div>
-                                <div className="text-right flex flex-col items-end">
-                                    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${request.type === 'replace' ? 'bg-orange-50 text-orange-600 border-orange-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100'}`}>
-                                        {request.type === 'replace' ? 'Exchange' : 'Refund'}
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div className="p-6">
-                                <div className="flex flex-col md:flex-row gap-6 items-center">
-                                    <div className="flex-1 w-full space-y-4">
-                                        <p className="text-xs font-bold text-gray-400 uppercase mb-2">Items</p>
-                                        <div className="flex gap-3 overflow-x-auto pb-2 pt-2">
-                                            {request.items.map((item, i) => (
-                                                <div key={i} className="relative group shrink-0">
-                                                    <div className="w-14 h-14 bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
-                                                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
-                                                    </div>
-                                                    <span className="absolute -top-1 -right-1 min-w-[20px] h-5 px-1 bg-footerBg text-white text-[10px] font-black rounded-full flex items-center justify-center border-2 border-white shadow-sm leading-none">
-                                                        {item.qty}
-                                                    </span>
-                                                </div>
-                                            ))}
+                            <div className="p-3 md:p-6">
+                                <div className="flex flex-col gap-3">
+                                    {/* Top Row: ID & Request Type */}
+                                    <div className="flex justify-between items-start">
+                                        <div className="space-y-1">
+                                            <div className="flex items-center gap-2">
+                                                <span className="font-mono font-black text-footerBg text-sm md:text-lg tracking-tight">{request.id}</span>
+                                                <span className={`text-[8px] md:text-[9px] font-black uppercase px-2 py-0.5 rounded-full border transition-all ${getStatusColor(request.status)}`}>
+                                                    {request.status}
+                                                </span>
+                                            </div>
+                                            <div className="text-[9px] md:text-xs text-slate-400 font-bold uppercase tracking-wider flex items-center gap-1.5">
+                                                <Clock size={10} className="shrink-0" />
+                                                {new Date(request.requestDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-[8px] text-slate-300 font-black uppercase tracking-widest leading-none mb-1">Type</p>
+                                            <span className={`px-2 py-0.5 rounded-full text-[8px] md:text-[9px] font-black uppercase tracking-widest border ${request.type === 'replace' ? 'bg-orange-50 text-orange-600 border-orange-100' : 'bg-emerald-50 text-emerald-600 border-emerald-100'}`}>
+                                                {request.type === 'replace' ? 'Exchange' : 'Refund'}
+                                            </span>
                                         </div>
                                     </div>
 
-                                    <div className="w-full md:w-auto flex md:flex-col gap-3">
+                                    {/* Bottom Row: View Status Button */}
+                                    <div className="pt-1 flex flex-col gap-3">
                                         <button
                                             onClick={() => navigate(`/${request.type === 'replace' ? 'replacement' : 'return'}/${request.id}`)}
-                                            className="flex-1 md:flex-none w-full bg-white border border-footerBg text-footerBg px-6 py-2.5 rounded-xl text-sm font-bold hover:bg-footerBg hover:text-white transition-all flex items-center justify-center gap-2 group whitespace-nowrap"
+                                            className="w-full md:w-fit md:ml-auto md:px-10 bg-slate-50 border border-slate-100 text-footerBg py-2.5 md:py-3 rounded-xl text-[9px] md:text-xs font-black uppercase tracking-widest active:scale-95 transition-all flex items-center justify-center gap-2 group hover:bg-footerBg hover:text-white"
                                         >
                                             View Status
-                                            <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                            <ChevronRight size={12} className="group-hover:translate-x-1 transition-transform" />
                                         </button>
+
+                                        {request.status === 'Pending' && (
+                                            <div className="flex gap-2 items-center text-[8px] md:text-[10px] text-slate-300 font-bold uppercase tracking-tight justify-center md:justify-end">
+                                                <AlertCircle size={10} className="text-blue-400 shrink-0" />
+                                                Reviewing Your request shortly.
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
-
-                                {request.status === 'Pending' && (
-                                    <div className="mt-4 pt-4 border-t border-gray-100 flex gap-2 items-center text-xs text-gray-500">
-                                        <AlertCircle size={14} className="text-blue-500" />
-                                        Your request is under review. We will update you shortly.
-                                    </div>
-                                )}
                             </div>
                         </motion.div>
                     ))}

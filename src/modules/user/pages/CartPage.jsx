@@ -150,79 +150,72 @@ const CartPage = () => {
     }
 
     return (
-        <div className="bg-[#fcfcfc] min-h-screen py-12">
-            <div className="container mx-auto px-4 md:px-12">
-                <div className="flex items-center gap-4 mb-10">
+        <div className="bg-[#fcfcfc] min-h-screen py-3 md:py-12">
+            <div className="container mx-auto px-2 md:px-12">
+                <div className="flex items-center gap-2 mb-3 md:mb-10">
                     <button
                         onClick={() => navigate(-1)}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-gray-500"
+                        className="w-7 h-7 flex items-center justify-center bg-white border border-gray-100 rounded-full shadow-sm text-gray-400 hover:text-primary transition-colors"
                     >
-                        <ArrowLeft size={24} />
+                        <ArrowLeft size={16} />
                     </button>
-                    <h1 className="text-3xl font-black text-footerBg uppercase tracking-tight">Shopping Bag</h1>
+                    <h1 className="text-lg md:text-3xl font-black text-footerBg uppercase tracking-tight">Shopping Bag</h1>
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-12">
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-2 space-y-2 md:space-y-6">
                         {enrichedCart.map((item) => (
-                            <div key={item.id} className="bg-white p-6 rounded-2xl border border-gray-100 flex gap-6 shadow-sm group">
+                            <div key={item.id} className="bg-white p-2 md:p-6 rounded-lg md:rounded-2xl border border-gray-100 flex gap-2 md:gap-6 shadow-sm group">
                                 <div
                                     onClick={() => navigate(`/product/${item.id}`)}
-                                    className="w-24 h-24 rounded-xl overflow-hidden bg-gray-50 shrink-0 cursor-pointer"
+                                    className="w-16 h-16 md:w-24 md:h-24 rounded-md md:rounded-xl overflow-hidden bg-gray-50 shrink-0 cursor-pointer"
                                 >
                                     <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 </div>
-                                <div className="flex-1 flex flex-col justify-between">
+                                <div className="flex-1 flex flex-col justify-between min-w-0">
                                     <div className="flex justify-between items-start">
                                         <div
                                             onClick={() => navigate(`/product/${item.productId || item.id}`)}
-                                            className="cursor-pointer"
+                                            className="cursor-pointer min-w-0"
                                         >
-                                            <h3 className="font-bold text-footerBg text-lg group-hover:text-primary transition-colors">{item.name}</h3>
-                                            <div className="flex gap-4 items-center">
-                                                <p className="text-gray-500 text-sm">{item.category}</p>
+                                            <h3 className="font-bold text-footerBg text-[13px] md:text-lg group-hover:text-primary transition-colors line-clamp-2 pr-1">{item.name}</h3>
+                                            <div className="flex gap-1.5 items-center flex-wrap">
+                                                <p className="text-gray-400 text-[9px] md:text-sm uppercase tracking-tighter">{item.category}</p>
                                                 {item.weight && (
-                                                    <span className="text-primary font-bold text-xs bg-primary/5 px-2 py-0.5 rounded">
+                                                    <span className="text-primary font-black text-[8px] md:text-xs bg-primary/5 px-1.5 py-0.5 rounded">
                                                         {item.weight}
                                                     </span>
                                                 )}
                                             </div>
                                         </div>
-                                        <div className="flex items-center gap-2">
-                                            <button
-                                                onClick={() => moveToSaveForLater(user.id, item.id)}
-                                                className="text-[10px] font-bold text-primary uppercase tracking-wider hover:underline"
-                                            >
-                                                Save for later
-                                            </button>
-                                            <span className="text-gray-200">|</span>
+                                        <div className="flex items-center gap-1">
                                             <button
                                                 onClick={() => removeFromCart(user.id, item.id)}
-                                                className="text-gray-300 hover:text-red-500 transition-colors"
+                                                className="text-gray-200 hover:text-red-500 transition-colors p-1"
                                             >
-                                                <Trash2 size={18} />
+                                                <Trash2 size={14} />
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="flex justify-between items-end mt-4">
-                                        <div className="flex items-center border border-gray-100 rounded-lg overflow-hidden">
+                                    <div className="flex justify-between items-center mt-1 md:mt-4">
+                                        <div className="flex items-center border border-gray-100 rounded-md overflow-hidden bg-gray-50/50">
                                             <button
                                                 onClick={() => updateCartQty(user.id, item.id, item.qty - 1)}
-                                                className="p-2 hover:bg-gray-50 transition-colors"
+                                                className="p-1 md:p-2 hover:bg-white transition-colors"
                                             >
-                                                <Minus size={14} />
+                                                <Minus size={10} />
                                             </button>
-                                            <span className="w-10 text-center font-bold">{item.qty}</span>
+                                            <span className="w-7 md:w-10 text-center font-bold text-[11px] md:text-base">{item.qty}</span>
                                             <button
                                                 onClick={() => updateCartQty(user.id, item.id, item.qty + 1)}
-                                                className="p-2 hover:bg-gray-50 transition-colors"
+                                                className="p-1 md:p-2 hover:bg-white transition-colors"
                                             >
-                                                <Plus size={14} />
+                                                <Plus size={10} />
                                             </button>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-gray-400 text-sm line-through">₹{929 * item.qty}</div>
-                                            <div className="text-xl font-black text-footerBg">₹{item.price * item.qty}</div>
+                                            <div className="text-gray-400 text-[9px] md:text-sm line-through">₹{Math.round(item.price * 1.5) * item.qty}</div>
+                                            <div className="text-sm md:text-xl font-black text-footerBg">₹{item.price * item.qty}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -231,60 +224,54 @@ const CartPage = () => {
                     </div>
 
                     <div className="h-fit sticky top-28">
-                        <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
-                            <h2 className="text-xl font-black text-footerBg uppercase tracking-tight">Order Summary</h2>
-                            <div className="space-y-4 text-sm font-medium">
+                        <div className="bg-white p-4 md:p-8 rounded-xl md:rounded-3xl border border-gray-100 shadow-sm space-y-3 md:space-y-6">
+                            <h2 className="text-base md:text-xl font-black text-footerBg uppercase tracking-tight">Order Summary</h2>
+                            <div className="space-y-2 md:space-y-4 text-[11px] md:text-sm font-medium">
                                 <div className="flex justify-between text-gray-500">
                                     <span>Subtotal</span>
-                                    <span>₹{subtotal}</span>
+                                    <span className="font-bold text-footerBg">₹{subtotal}</span>
                                 </div>
                                 <div className="flex justify-between text-gray-500">
                                     <span>Shipping</span>
-                                    <span className="text-emerald-500">FREE</span>
+                                    <span className="text-emerald-500 font-bold italic">FREE</span>
                                 </div>
-                                <div className="pt-4 border-t border-gray-100 flex justify-between text-xl font-black text-footerBg">
-                                    <span>Total</span>
+                                <div className="pt-2 md:pt-4 border-t border-gray-100 flex justify-between text-base md:text-xl font-black text-footerBg">
+                                    <span>Total Amount</span>
                                     <span>₹{subtotal}</span>
                                 </div>
                             </div>
                             <button
                                 onClick={() => navigate('/checkout')}
-                                className="w-full bg-footerBg text-white py-4 rounded-xl font-black uppercase tracking-widest hover:bg-primary transition-all shadow-lg"
+                                className="w-full bg-footerBg text-white py-2.5 md:py-4 rounded-lg md:rounded-xl font-black text-[10px] md:text-xs uppercase tracking-[0.2em] hover:bg-primary transition-all shadow-lg active:scale-95"
                             >
-                                Checkout
+                                Secure Checkout
                             </button>
                         </div>
 
                         {/* Available Coupons Discovery */}
                         {availableCoupons.length > 0 && (
-                            <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm mt-6">
-                                <h3 className="text-xs font-black text-gray-400 mb-4 uppercase tracking-widest flex items-center gap-2">
-                                    <Tag size={14} />
-                                    Available Coupons
+                            <div className="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm mt-4 md:mt-6">
+                                <h3 className="text-[10px] font-black text-gray-400 mb-3 md:mb-4 uppercase tracking-widest flex items-center gap-2">
+                                    <Tag size={12} />
+                                    Best Coupons for you
                                 </h3>
-                                <div className="space-y-3">
+                                <div className="space-y-2 md:space-y-3">
                                     {availableCoupons.slice(0, 2).map((coupon) => (
-                                        <div key={coupon.id} className="p-3 rounded-2xl border border-primary/10 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer group"
+                                        <div key={coupon.id} className="p-2.5 md:p-3 rounded-xl md:rounded-2xl border border-primary/10 bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer group"
                                             onClick={() => navigate('/checkout')}
                                         >
-                                            <div className="flex items-start gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center border border-primary/20 shrink-0">
-                                                    <Percent size={14} className="text-primary" />
+                                            <div className="flex items-start gap-2 md:gap-3">
+                                                <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-white flex items-center justify-center border border-primary/20 shrink-0">
+                                                    <Percent size={12} className="text-primary" />
                                                 </div>
-                                                <div className="flex-1">
-                                                    <p className="text-xs font-black text-footerBg mb-0.5">{coupon.code}</p>
-                                                    <p className="text-[10px] text-gray-500 line-clamp-2">{coupon.description}</p>
+                                                <div className="flex-1 min-w-0">
+                                                    <p className="text-[10px] md:text-xs font-black text-footerBg mb-0.5 truncate">{coupon.code}</p>
+                                                    <p className="text-[9px] md:text-[10px] text-gray-400 line-clamp-1">{coupon.description}</p>
                                                 </div>
-                                                <ChevronRight size={14} className="text-gray-300 group-hover:text-primary transition-colors mt-1" />
+                                                <ChevronRight size={12} className="text-gray-300 group-hover:text-primary transition-colors mt-1.5" />
                                             </div>
                                         </div>
                                     ))}
-                                    <button
-                                        onClick={() => navigate('/checkout')}
-                                        className="w-full py-2 text-[10px] font-bold text-primary uppercase tracking-wider hover:underline"
-                                    >
-                                        Apply at checkout
-                                    </button>
                                 </div>
                             </div>
                         )}
@@ -293,37 +280,39 @@ const CartPage = () => {
 
                 {/* Save for Later Section */}
                 {enrichedSaved.length > 0 && (
-                    <div className="mt-20 border-t border-gray-100 pt-16">
-                        <div className="flex items-center gap-3 mb-8">
-                            <h3 className="text-xl font-black text-footerBg uppercase tracking-tight">Your Reserved Vault</h3>
-                            <span className="bg-orange-100 text-orange-600 text-xs font-bold px-2 py-0.5 rounded-full">
-                                {enrichedSaved.length} Items
+                    <div className="mt-12 border-t border-gray-100 pt-8">
+                        <div className="flex items-center gap-2 mb-6 text-center justify-center">
+                            <h3 className="text-lg font-black text-footerBg uppercase tracking-tight">Reserved for Later</h3>
+                            <span className="bg-orange-50 text-orange-600 text-[10px] font-black px-2 py-0.5 rounded-full border border-orange-100">
+                                {enrichedSaved.length}
                             </span>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                             {enrichedSaved.map((item) => (
-                                <div key={item.id} className="bg-white p-4 rounded-3xl border border-gray-100 flex gap-4 shadow-sm hover:shadow-md transition-all">
-                                    <div className="w-20 h-20 rounded-2xl overflow-hidden bg-gray-50 shrink-0">
+                                <div key={item.id} className="bg-white p-3 rounded-2xl border border-gray-50 flex gap-3 shadow-sm hover:shadow-md transition-all h-full">
+                                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-50 shrink-0">
                                         <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                                     </div>
-                                    <div className="flex-1 flex flex-col justify-between">
+                                    <div className="flex-1 flex flex-col justify-between min-w-0">
                                         <div>
-                                            <h4 className="font-bold text-footerBg text-sm line-clamp-1">{item.name}</h4>
-                                            <p className="text-[10px] text-gray-500 font-bold">{item.weight || 'Default Pack'}</p>
-                                            <p className="text-primary font-black text-sm mt-1">₹{item.price}</p>
+                                            <h4 className="font-bold text-footerBg text-xs line-clamp-1">{item.name}</h4>
+                                            <div className="flex items-center gap-2 mt-0.5">
+                                                <p className="text-[9px] text-gray-400 font-bold">{item.weight || 'Default'}</p>
+                                                <p className="text-primary font-black text-xs">₹{item.price}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-3 mt-2">
+                                        <div className="flex items-center gap-2 mt-2">
                                             <button
                                                 onClick={() => moveToCartFromSaved(user.id, item.id)}
-                                                className="text-[10px] font-bold text-white bg-footerBg px-3 py-1.5 rounded-lg hover:bg-primary transition-all whitespace-nowrap"
+                                                className="flex-1 text-[9px] font-black text-white bg-footerBg py-1.5 rounded-lg hover:bg-primary transition-all whitespace-nowrap uppercase tracking-widest"
                                             >
                                                 Move to Cart
                                             </button>
                                             <button
                                                 onClick={() => removeFromSaved(user.id, item.id)}
-                                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                                className="w-8 h-8 flex items-center justify-center text-gray-300 hover:text-red-500 transition-colors border border-gray-100 rounded-lg hover:bg-red-50"
                                             >
-                                                <Trash2 size={14} />
+                                                <Trash2 size={12} />
                                             </button>
                                         </div>
                                     </div>
@@ -335,16 +324,16 @@ const CartPage = () => {
 
                 {/* Recommended Section - "You might also like" */}
                 {user && (
-                    <div className="mt-20 border-t border-gray-100 pt-16">
-                        <div className="space-y-1 mb-8 flex items-end justify-between">
-                            <div>
-                                <h3 className="text-xl font-black text-footerBg uppercase tracking-tight">You Might Also Like</h3>
-                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Based on your personality & cart</p>
+                    <div className="mt-12 md:mt-20 border-t border-gray-100 pt-10 md:pt-16">
+                        <div className="space-y-1 mb-6 md:mb-8 flex items-end justify-between">
+                            <div className="text-center md:text-left w-full md:w-auto">
+                                <h3 className="text-lg md:text-xl font-black text-footerBg uppercase tracking-tight">You Might Also Like</h3>
+                                <p className="text-[9px] md:text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">Based on your personality & cart</p>
                             </div>
-                            <button className="text-xs font-bold text-primary hover:underline">View All</button>
+                            <button className="hidden md:block text-xs font-bold text-primary hover:underline">View All</button>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {(getRecommendations(user.id, 4).length > 0 ? getRecommendations(user.id, 4) : DUMMY_PRODUCTS).map((item) => (
+                        <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6">
+                            {(getRecommendations(user.id, 5).length > 0 ? getRecommendations(user.id, 5) : DUMMY_PRODUCTS).map((item) => (
                                 <ProductCard key={item.id} product={item} />
                             ))}
                         </div>
